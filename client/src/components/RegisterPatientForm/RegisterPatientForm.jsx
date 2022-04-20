@@ -10,15 +10,6 @@ const RegisterPatientForm = () => {
 			RegisterPatientForm<p>hello</p>
 			RegisterPatientForm<p>hello</p>
 			RegisterPatientForm<p>hello</p>
-			RegisterPatientForm<p>hello</p>
-			RegisterPatientForm<p>hello</p>
-			RegisterPatientForm<p>hello</p>
-			RegisterPatientForm<p>hello</p>
-			RegisterPatientForm<p>hello</p>
-			RegisterPatientForm<p>hello</p>
-			RegisterPatientForm<p>hello</p>
-			RegisterPatientForm<p>hello</p>
-			RegisterPatientForm<p>hello</p>
 			<p>hello</p>
 		</Box>
 	);

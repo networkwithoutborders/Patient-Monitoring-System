@@ -13,23 +13,20 @@ const Registration = () => {
 			direction="row"
 			justifyContent="space-between"
 			alignItems="stretch"
-			sx={{ height: "100vh", width: "100%", overflowY: "hidden" }}
+			sx={{ height: "100vh", width: "100%", overflow: "auto", }}
 		>
-			<Grid item xs={12}>
+			<Grid item xs={12}
+			sx={{position:"absolute",left:0,top:0,right:0}}>
 				<Header />
 			</Grid>
 			<Grid
 				item
 				xs={12}
-				sx={{
-					// backgroundColor: "red",
-					overflow: "auto",
-					height: "85vh",
-				}}
 			>
 				<RegisterPatientForm />
 			</Grid>
-			<Grid item xs={12}>
+			<Grid item xs={12}
+				sx={{position:"absolute",left:0,bottom:0,right:0}}>
 				<RegisterPatient />
 			</Grid>
 		</Grid>
