@@ -11,6 +11,20 @@ const getPatient = asyncHandler(async(req, res) =>{
    res.status(200).json(patient)
 })
 
+// @desc Get patient ID
+// @route GET /api/patient/getPatientId
+// @access Private
+const getPatientId = asyncHandler( async(req,res) => {
+    try {
+        const patientId = await Patient.findById(req.params.id);
+        res.status(200).json(patientId);
+      } catch (err) {
+        res.status(500).json(err);
+      }
+})
+
+
+
 // @desc    Register New Patient Details
 // @route   POST /api/patient/setPatient
 // @access  Private
@@ -23,7 +37,7 @@ const setPatient = asyncHandler(async(req, res) =>{
             age: req.body.age,
             gender: req.body.gender,
             bloodgroup: req.body.bloodgroup,
-            mobilenumber: req.body.mobilenumber,
+            phone: req.body.phone,
             address: req.body.address,          
         })
 
@@ -39,5 +53,6 @@ const setPatient = asyncHandler(async(req, res) =>{
 
 module.exports ={
     getPatient, 
-    setPatient
+    setPatient,
+    getPatientId
 }

@@ -2,46 +2,41 @@ const mongoose = require("mongoose");
 
 const PatientSchema = mongoose.Schema(
   {
+  
     firstname: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    middlename: {
+        type: String,
+        
+      },
+      middlename: {
         type: String,
         required: false,
-        unique: true,
-    },
-    lastname: {
+        
+      },
+      lastname: {
         type: String,
         required: false,
-        unique: true,
-    },
-    age:{
-        type: Number,
-        required: true,
-        unique: true,
-    },
-    gender:{
+        
+      },
+      age: {
         type: String,
-        required: true,
-        unique: true,
-    },
-    bloodgroup:{
+        
+      },
+      gender: {
         type: String,
-        required: true,
-        unique: true,
-    },
-    mobilenumber:{
+        
+      },
+      bloodgroup: {
         type: String,
-        required: false,
-        unique: true,
-    },
-    address:{
+        
+      },
+      phone: {
         type: String,
-        required: false,
-        unique: true,
-    },
+        
+      },
+      address:{
+          type: String,
+         
+      }
   
   },
   { timestamps: true }
