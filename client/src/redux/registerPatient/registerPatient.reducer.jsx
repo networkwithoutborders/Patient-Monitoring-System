@@ -6,7 +6,7 @@ const registerPatientReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case types.REGISTER_NEW_PATIENT:
 			return {
-				new: action.payload,
+				details: action.payload,
 			};
 
 		default:

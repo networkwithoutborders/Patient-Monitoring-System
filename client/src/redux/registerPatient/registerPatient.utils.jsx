@@ -1,5 +1,6 @@
-export const registerNewPatient = () => {
+export const registerNewPatient = (patientDetails) => {
+	// console.log(patientDetails);
 	return {
-		hello: "hello",
+		...patientDetails,
 	};
 };

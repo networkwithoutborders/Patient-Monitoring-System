@@ -5,12 +5,11 @@ import { Grid, Button, Paper } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { registerNewPatient } from "../../redux/registerPatient/registerPatient.action";
 
-const RegisterPatient = () => {
+const RegisterPatient = ({ patientDetails }) => {
 	const dispatch = useDispatch();
 
 	const handlePatientRegister = () => {
-		console.log("registered");
-		dispatch(registerNewPatient());
+		dispatch(registerNewPatient(patientDetails));
 	};
 
 	return (
