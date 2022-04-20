@@ -1,0 +1,17 @@
+import types from "./registerPatient.types";
+
+const INITIAL_STATE = {};
+
+const registerPatientReducer = (state = INITIAL_STATE, action) => {
+	switch (action.type) {
+		case types.REGISTER_NEW_PATIENT:
+			return {
+				new: action.payload,
+			};
+
+		default:
+			return state;
+	}
+};
+
+export default registerPatientReducer;
