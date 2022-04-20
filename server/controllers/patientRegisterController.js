@@ -1,10 +1,14 @@
 const asyncHandler = require('express-async-handler')
 
+const Patient = require('../models/patient')
+
 // @desc    Get All Patient Details
 // @route   GET /api/patient/getPatient
 // @access  Private
 const getPatient = asyncHandler(async(req, res) =>{
-    res.status(200).json({ message: 'Get patient details'})
+   const patient = await Patient.find()
+
+   res.status(200).json(patient)
 })
 
 // @desc    Register New Patient Details
@@ -24,7 +28,7 @@ const setPatient = asyncHandler(async(req, res) =>{
         })
 
         const patient =  await newPatient.save();
-        res.status(200).json(user);
+        res.status(200).json(patient);
     } catch(err){
         res.status(500).json(err);
     }
