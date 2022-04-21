@@ -1,6 +1,6 @@
 import types from "./registerPatient.types";
 
-const INITIAL_STATE = {};
+const INITIAL_STATE = { details: "" };
 
 const registerPatientReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {

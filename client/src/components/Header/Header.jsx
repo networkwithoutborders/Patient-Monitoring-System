@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
-const Header = () => {
+const Header = ({ title }) => {
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<AppBar position="static">
@@ -13,11 +13,9 @@ const Header = () => {
 					<Typography
 						variant="h6"
 						component="div"
-						sx={{ flexGrow: 1, }}
-											
-
+						sx={{ flexGrow: 1 }}
 					>
-						Patient Registration
+						{title}
 					</Typography>
 				</Toolbar>
 			</AppBar>

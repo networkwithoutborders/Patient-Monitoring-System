@@ -110,7 +110,7 @@ const RegisterPatientForm = ({ patientDetails, setPatientDetails }) => {
 			direction="row"
 			justifyContent="center"
 			alignItems="center"
-			sx={{ width: "100%", height: "100%", mt: 5 }}
+			sx={{ width: "100%", height: "100%" }}
 		>
 			{/* <Grid item>
 				<Typography variant="subtitle1">Name</Typography>

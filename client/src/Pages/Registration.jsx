@@ -30,11 +30,17 @@ const Registration = () => {
 			<Grid
 				item
 				xs={12}
-				sx={{ position: "absolute", left: 0, top: 0, right: 0 }}
+				sx={{
+					position: "absolute",
+					left: 0,
+					top: 0,
+					right: 0,
+					zIndex: 1,
+				}}
 			>
-				<Header />
+				<Header title="Register Patient" />
 			</Grid>
-			<Grid item xs={12}>
+			<Grid item xs={12} sx={{ mt: 5, zIndex: 0 }}>
 				<RegisterPatientForm
 					patientDetails={patientDetails}
 					setPatientDetails={setPatientDetails}
