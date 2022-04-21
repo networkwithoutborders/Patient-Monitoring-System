@@ -22,3 +22,10 @@ Reports are uploaded.
 |Notified if the vitals are below normal or problematic.|     ✅    |     ✅   |
 | Reports are uploaded.                |     ❌    |   ✅     |
 | Reminders for daily patient checkups |    ✅    |     ❌    |
+
+Tech Stacks used:
+Front End Technologies - React Js 
+Back End Technologies - Node Js, Mongo Db 
+ 
+ 
+Compatibility: Android, Web.
