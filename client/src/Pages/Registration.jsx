@@ -10,6 +10,13 @@ const Registration = () => {
 	const [patientDetails, setPatientDetails] = React.useState({
 		firstName: "",
 		lastName: "",
+		age: "",
+		gender: "male",
+		bloodGroup: "",
+		phoneNumber: "",
+		address: "",
+		city: "",
+		district: "",
 	});
 
 	return (

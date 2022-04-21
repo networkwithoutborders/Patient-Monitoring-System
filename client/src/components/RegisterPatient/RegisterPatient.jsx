@@ -9,6 +9,7 @@ const RegisterPatient = ({ patientDetails }) => {
 	const dispatch = useDispatch();
 
 	const handlePatientRegister = () => {
+		// console.log(patientDetails);
 		dispatch(registerNewPatient(patientDetails));
 	};
 
