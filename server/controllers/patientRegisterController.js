@@ -10,7 +10,7 @@ const Patient = require('../models/patient')
 const getPatient = asyncHandler(async(req, res) =>{
    const patient = await Patient.find()
 
-   res.status(200).json(patient)
+   res.status(200).json(patient._id)
 })
 
 // @desc Get patient ID
@@ -44,8 +44,7 @@ const setPatient = asyncHandler(async(req, res) =>{
         })
 
         const patient =  await newPatient.save();
-        const patientId = await Patient.findById(req.params.id);
-        res.status(200).json(patientId);
+        res.status(200).json(patient._id);
     } catch(err){
         res.status(500).json(err);
     }
