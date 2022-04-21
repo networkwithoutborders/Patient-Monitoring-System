@@ -5,6 +5,7 @@ const PatientSchema = mongoose.Schema(
   
     firstname: {
         type: String,
+        required: true,
         
       },
       middlename: {
@@ -19,23 +20,23 @@ const PatientSchema = mongoose.Schema(
       },
       age: {
         type: String,
-        
+        required: false,
       },
       gender: {
         type: String,
-        
+        required: false,
       },
       bloodgroup: {
         type: String,
-        
+        required: false,
       },
       phone: {
         type: String,
-        
+        required: false,
       },
       address:{
           type: String,
-         
+          required: false,
       }
   
   },

@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler')
 
+
 const Patient = require('../models/patient')
 
 // @desc    Get All Patient Details
