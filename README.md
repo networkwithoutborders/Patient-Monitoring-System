@@ -1,7 +1,7 @@
 # Patient-Monitoring-System
 
 WHAT (What does this web app do?)
-The s primary focus is to effectively use the time spent on manual registration by updating the patients' information on this web app.
+The application primary focus is to effectively use the time spent on manual registration by updating the patients' information on this web app.
 WHY (What problem does it solve?)
 (Registering manually will take more time due to which the testing time may differ from the actual time.) 
 This application simplifies data entry, reducing patient wait time and making it easier for doctors to keep track of patient information. 
