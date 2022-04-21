@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 
 
+
 const Patient = require('../models/patient')
 
 // @desc    Get All Patient Details
@@ -43,7 +44,8 @@ const setPatient = asyncHandler(async(req, res) =>{
         })
 
         const patient =  await newPatient.save();
-        res.status(200).json(patient);
+        const patientId = await Patient.findById(req.params.id);
+        res.status(200).json(patientId);
     } catch(err){
         res.status(500).json(err);
     }

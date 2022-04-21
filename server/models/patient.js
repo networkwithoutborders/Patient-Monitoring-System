@@ -1,7 +1,20 @@
 const mongoose = require("mongoose");
+const generateUniqueId = require('generate-unique-id');
+
+  
 
 const PatientSchema = mongoose.Schema(
   {
+     _id: { 
+      type: String, 
+      default: function genUUID () { 
+        const id = generateUniqueId({
+          length: 6,
+          useLetters: false
+        });
+        var pid = 'PID' + id
+        return pid
+       }},
   
     firstname: {
         type: String,
