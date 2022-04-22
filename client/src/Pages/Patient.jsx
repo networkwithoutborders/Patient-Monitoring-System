@@ -18,7 +18,7 @@ const Patient = () => {
 	);
 
 	const generateQrCode = async () => {
-		console.log(patient);
+		// console.log(patient);
 		try {
 			const response = await QRCode.toDataURL(patient._id);
 			setQrCode(response);
