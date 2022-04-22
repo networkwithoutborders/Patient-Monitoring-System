@@ -13,7 +13,7 @@ connectDB()
 const app = express()
 
 
-const whitelist = ["https://pms-mernapp-demo.netlify.app/"]
+const whitelist = ["https://pms-mernapp-demo.netlify.app/","http://localhost:3000"]
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || whitelist.indexOf(origin) !== -1) {
