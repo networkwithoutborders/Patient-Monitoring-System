@@ -1,6 +1,6 @@
 https://pms-mernapp-demo.herokuapp.com/
 
-//Drploy changes to server to heroku
+//Deploy changes to server to heroku
 $ git add .
 $ git commit -am "comment"
 $ git push heroku master
