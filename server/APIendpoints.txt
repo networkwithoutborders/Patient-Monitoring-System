@@ -1,4 +1,4 @@
-https://patient-monitoring-restapi-app.herokuapp.com/
+https://pms-mernapp-demo.herokuapp.com/
 
 1. Register New Patient
 localhost:8000/api/patient/setpatient
