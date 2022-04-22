@@ -11,8 +11,9 @@ import TextField from "@mui/material/TextField";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
+import FormLabel from "@mui/material/FormLabel";
 
-const RegisterPatientForm = ({ patientDetails, setPatientDetails }) => {
+const RegisterPatientForm = ({ patientDetails, setPatientDetails, formik }) => {
 	const handleFirstName = (e) => {
 		const fname = e.target.value;
 
@@ -34,7 +35,13 @@ const RegisterPatientForm = ({ patientDetails, setPatientDetails }) => {
 		});
 	};
 	const handleAgeChange = (e) => {
-		const age = e.target.value;
+		var age = e.target.value;
+		if (parseInt(age) < 0) {
+			age = 0;
+		}
+		if (age[0] === "0") {
+			age = age.slice(1);
+		}
 
 		setPatientDetails((prevValue) => {
 			return {
@@ -124,11 +131,23 @@ const RegisterPatientForm = ({ patientDetails, setPatientDetails }) => {
 				<Grid container direction="column">
 					<Grid item sx={{ mb: 1, mt: 1 }}>
 						<TextField
+							// required
+							name="firstName"
 							label="First name"
 							variant="outlined"
 							sx={{ mr: 1 }}
-							value={patientDetails.firstName}
-							onChange={handleFirstName}
+							// value={patientDetails.firstName}
+							// onChange={handleFirstName}
+							value={formik.values.firstName}
+							onChange={formik.handleChange}
+							error={
+								formik.touched.firstName &&
+								Boolean(formik.errors.firstName)
+							}
+							helperText={
+								formik.touched.firstName &&
+								formik.errors.firstName
+							}
 						/>
 						<TextField
 							label="Last name"
@@ -146,9 +165,15 @@ const RegisterPatientForm = ({ patientDetails, setPatientDetails }) => {
 							variant="outlined"
 							value={patientDetails.age}
 							onChange={handleAgeChange}
+							InputProps={{
+								inputProps: { min: 0, max: 100 },
+							}}
 						/>
 					</Grid>
 					<Grid item sx={{ mt: 1, mb: 1 }}>
+						<FormLabel id="demo-row-radio-buttons-group-label">
+							Gender
+						</FormLabel>
 						<RadioGroup
 							row
 							value={patientDetails.gender}
@@ -207,6 +232,9 @@ const RegisterPatientForm = ({ patientDetails, setPatientDetails }) => {
 							variant="outlined"
 							value={patientDetails.phoneNumber}
 							onChange={handlePhoneNumberChange}
+							InputProps={{
+								inputProps: { maxLength: 10 },
+							}}
 						/>
 					</Grid>
 					<Grid item sx={{ mb: 1, mt: 1 }}>
@@ -231,8 +259,8 @@ const RegisterPatientForm = ({ patientDetails, setPatientDetails }) => {
 								<MenuItem value="">
 									<em>None</em>
 								</MenuItem>
-								<MenuItem value={"Delhi"}>Delhi</MenuItem>
-								<MenuItem value={"Mumbai"}>Mumbai</MenuItem>
+								{/* <MenuItem value={"Delhi"}>Delhi</MenuItem>
+								<MenuItem value={"Mumbai"}>Mumbai</MenuItem> */}
 								<MenuItem value={"Chennai"}>Chennai</MenuItem>
 							</Select>
 						</FormControl>
@@ -249,15 +277,15 @@ const RegisterPatientForm = ({ patientDetails, setPatientDetails }) => {
 								<MenuItem value="">
 									<em>None</em>
 								</MenuItem>
-								<MenuItem value={"District 1"}>
-									District 1
+								<MenuItem value={"Chengalpattu"}>
+									Chengalpattu
 								</MenuItem>
-								<MenuItem value={"District 2"}>
+								{/* <MenuItem value={"District 2"}>
 									District 2
 								</MenuItem>
 								<MenuItem value={"District 3"}>
 									District 3
-								</MenuItem>
+								</MenuItem> */}
 							</Select>
 						</FormControl>
 					</Grid>
