@@ -9,12 +9,18 @@ import Typography from "@mui/material/Typography";
 
 import Header from "../components/Header/Header";
 
+import { useSelector } from "react-redux";
+
 const Patient = () => {
 	const [qrCode, setQrCode] = React.useState("");
+	const patient = useSelector(
+		(state) => state.registerPatientReducer.details
+	);
 
 	const generateQrCode = async () => {
+		console.log(patient);
 		try {
-			const response = await QRCode.toDataURL("test qrcode");
+			const response = await QRCode.toDataURL(patient._id);
 			setQrCode(response);
 		} catch (err) {
 			console.log(err);
@@ -46,13 +52,13 @@ const Patient = () => {
 					/>
 					<CardContent>
 						<Typography gutterBottom variant="h5" component="div">
-							patient ID
+							{patient._id}
 						</Typography>
 						<Typography variant="body2" color="text.secondary">
-							Patient Name
+							{`${patient.firstname} ${patient.lastname}`}
 						</Typography>
 						<Typography variant="body2" color="text.secondary">
-							Patient age
+							{`${patient.age} years`}
 						</Typography>
 					</CardContent>
 				</Card>

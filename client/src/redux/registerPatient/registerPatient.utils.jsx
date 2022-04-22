@@ -14,7 +14,7 @@ export const registerNewPatient = async (patientDetails) => {
 	};
 
 	const { data } = await API.registerPatient(form);
-	console.log(data);
+	// console.log(data);
 
 	return data;
 };
