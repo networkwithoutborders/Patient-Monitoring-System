@@ -1,5 +1,10 @@
 https://pms-mernapp-demo.herokuapp.com/
 
+//Drploy changes to server to heroku
+$ git add .
+$ git commit -am "comment"
+$ git push heroku master
+
 1. Register New Patient
 localhost:8000/api/patient/setpatient
 JSON Body
