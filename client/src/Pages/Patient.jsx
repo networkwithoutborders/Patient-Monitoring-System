@@ -18,7 +18,7 @@ const Patient = () => {
 	);
 
 	const generateQrCode = async () => {
-		// console.log(patient);
+		console.log(patient);
 		try {
 			const response = await QRCode.toDataURL(patient._id);
 			setQrCode(response);
@@ -52,11 +52,14 @@ const Patient = () => {
 					/>
 					<CardContent>
 						<Typography gutterBottom variant="h5" component="div">
-							{patient._id}
+						{`XX-XXXX-${patient.phone.slice(6)}`}
 						</Typography>
 						<Typography variant="body2" color="text.secondary">
 							{`${patient.firstname} ${patient.lastname}`}
 						</Typography>
+						{/* <Typography variant="body2" color="text.secondary">
+							{`XXXXXX${patient.age}`}
+						</Typography> */}
 						<Typography variant="body2" color="text.secondary">
 							{`${patient.age} years`}
 						</Typography>
