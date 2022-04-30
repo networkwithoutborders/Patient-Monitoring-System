@@ -23,10 +23,9 @@ Reports are uploaded.
 | Reports are uploaded.                |     ❌    |   ✅     |
 | Reminders for daily patient checkups |    ✅    |     ❌    |
 
-Tech Stacks used:
-Front End Technologies - React Js 
-Back End Technologies - Node Js, Mongo Db 
- 
+Tech Stacks used:<br>
+Front End Technologies - React Js <br>
+Back End Technologies - Node Js, Express Js
  
 Compatibility: Android, Web.
 <br>
