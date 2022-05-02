@@ -6,4 +6,4 @@ https://pacific-garden-92293.herokuapp.com/
 
 #### For authentication
 /auth/login (POST) - Send email and password as json body to login <br />
-/auth/register (POST) - Send id, first name, last name, gender, email, password, designation(doctor, patient) as json body to register a new user
+/auth/register (POST) - Send id, first_name, last_name, gender, email, password, designation(doctor, patient) as json body to register a new user
