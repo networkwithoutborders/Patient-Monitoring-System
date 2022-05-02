@@ -33,7 +33,7 @@ const registerUser = asyncHandler(async (req, res, next) =>{
     const salt = await bcrypt.genSalt(10)
     user.password = await bcrypt.hash(user.password, salt)
 
-    UserRepo.registerUser(user)
+    await UserRepo.registerUser(user)
 
     res.status(200).json({
         'msg': 'Successfully registered'

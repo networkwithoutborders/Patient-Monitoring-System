@@ -10,7 +10,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 
-app.use('/auth', require('./routes/user_routes'))
+app.use('/auth', require('./routes/auth_route'))
 
 app.all('/', (req, res) =>{
 	res.send('I am ready XD')
