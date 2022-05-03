@@ -127,6 +127,7 @@ const PreRegistrationForm = () => {
 					pl: 2,
 					pr: 2,
 					mb: 16,
+					zIndex: 1,
 				}}
 				// xs={10}
 			>
@@ -315,6 +316,7 @@ const PreRegistrationForm = () => {
 					width: "100%",
 					position: "absolute",
 					bottom: 0,
+					zIndex: 2,
 				}}
 			>
 				<Paper elevation={16}>
