@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Grid, Button, Paper, IconButton, Avatar } from "@mui/material";
+import { Grid, Button, Paper, IconButton, Avatar, Stack } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -109,7 +109,7 @@ const PreRegistrationForm = () => {
 	};
 
 	return (
-		<Grid
+		<Stack
 			container
 			direction="column"
 			justifyContent="space-between"
@@ -120,16 +120,17 @@ const PreRegistrationForm = () => {
 				item
 				sx={{
 					// backgroundColor: "yellow",
-					height: "100%",
+					// maxHeight: "80%",
 					width: "100%",
 					overflowY: "auto",
 					pt: 4,
 					pl: 2,
 					pr: 2,
-					mb: 16,
+					pb: 2,
+					// mb: 16,
 					zIndex: 1,
 				}}
-				// xs={10}
+				// xs={12}
 			>
 				<Grid
 					container
@@ -314,8 +315,8 @@ const PreRegistrationForm = () => {
 					// height: "80px",
 					// backgroundColor: "green",
 					width: "100%",
-					position: "absolute",
-					bottom: 0,
+					// position: "absolute",
+					// bottom: 0,
 					zIndex: 2,
 				}}
 			>
@@ -426,7 +427,7 @@ const PreRegistrationForm = () => {
 					</Grid>
 				</Paper>
 			</Grid>
-		</Grid>
+		</Stack>
 	);
 };
 
