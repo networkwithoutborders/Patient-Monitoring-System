@@ -284,6 +284,7 @@ const PreRegistration = () => {
 					width: "100%",
 					pt: 7,
 					pb: 0,
+					zIndex: -1,
 				}}
 			>
 				{/* <DrawerHeader /> */}
