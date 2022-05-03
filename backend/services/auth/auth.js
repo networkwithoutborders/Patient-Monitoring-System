@@ -1,17 +1,17 @@
 const express = require('express')
 const bcrypt = require('bcryptjs')
-const User = require('../../models/Users')
-const UserRepo = require('../../repository/user_repo')
+const Employee = require('../../models/Employee')
+const EmployeeRepo = require('../../repository/Employee_repo')
 const asyncHandler = require('express-async-handler')
-const errorConstants = require('../../utils/const')
+const {DUPLICATE_ENTRY, DUPLICATE_EMAIL, DUPLICATE_ID} = require('../../utils/const')
 
 
-// @desc Register User
-// @route POST api/user/
+// @desc Register Employee
+// @route POST api/Employee/
 // @access Public
 
-const registerUser = asyncHandler(async (req, res, next) =>{
-    const user = new User(
+const registerEmployee = asyncHandler(async (req, res, next) =>{
+    const employee = new Employee(
         req.body.id,
         req.body.firstName,
         req.body.lastName, 
@@ -20,20 +20,28 @@ const registerUser = asyncHandler(async (req, res, next) =>{
         req.body.password,
         req.body.designation
     )
-
-    if(!user.isValid()){
+    
+    if(!employee.isValid()){
        return next(new Error(400))
     }
         
-    if(await UserRepo.userExists(user.email)){
-        return next(new Error(errorConstants.DUPLICATE_ENTRY))
+    const st = await EmployeeRepo.employeeExists(employee.id,employee.email)
+    if(st != 0){
+        switch(st){
+            case 'id_email':
+                throw new Error(DUPLICATE_ENTRY);
+            case 'id':
+                throw new Error(DUPLICATE_ID);
+            case 'email':
+                throw new Error(DUPLICATE_EMAIL);
+        }
     }
 
     //Hash password
     const salt = await bcrypt.genSalt(10)
-    user.password = await bcrypt.hash(user.password, salt)
+    employee.password = await bcrypt.hash(employee.password, salt)
 
-    await UserRepo.registerUser(user)
+    await EmployeeRepo.registerEmployee(employee)
 
     res.status(200).json({
         'msg': 'Successfully registered'
@@ -41,22 +49,21 @@ const registerUser = asyncHandler(async (req, res, next) =>{
     
 })
  
-// @desc Authenticate a user
-// @route POST api/user/login
+// @desc Authenticate a Employee
+// @route POST api/Employee/login
 // @access Public
 
-const loginUser = asyncHandler(async (req, res, next) =>{
+const loginEmployee = asyncHandler(async (req, res, next) =>{
 
-    // const {email, password} = req.body
     const {id, password} = req.body
 
-    const user = await UserRepo.findUser(id)
+    const employee = await EmployeeRepo.findEmployee(id)
 
-    if(user && (await bcrypt.compare(password, user.password))){
+    if(employee && (await bcrypt.compare(password, employee.password))){
         res.json({
-            _id: user.id,
-            desgination: user.designation,
-           msg: `Welcome ${user.firstName}`
+            _id: employee.id,
+            desgination: employee.designation,
+           msg: `Welcome ${employee.firstName}`
         })
     } else{
         next(new Error(400))
@@ -65,6 +72,6 @@ const loginUser = asyncHandler(async (req, res, next) =>{
 })
 
 module.exports = {
-    registerUser,
-    loginUser
+    registerEmployee,
+    loginEmployee
 }

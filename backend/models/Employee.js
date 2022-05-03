@@ -1,9 +1,9 @@
 /**
- * These are the fields that the user schema will have in out database
+ * These are the fields that the Employee schema will have in out database
  * subjected to futher chnages
  */
 
-class User {
+class Employee {
     constructor(
         id,
         firstName,
@@ -23,13 +23,13 @@ class User {
         
     }
 
-    // Check user fields are valid or not
-    // @TODO - Add user
+    // Check Employee fields are valid or not
+    // @TODO - Add Employee
     isValid(){
-        return true
+        return true;
     }
 
 
 }
 
-module.exports = User
+module.exports = Employee;
