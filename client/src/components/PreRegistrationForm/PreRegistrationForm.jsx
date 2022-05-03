@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Grid, Button } from "@mui/material";
+import { Grid, Button, Paper, IconButton, Avatar } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -13,13 +13,8 @@ import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import Autocomplete from "@mui/material/Autocomplete";
-import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const AVPUoptions = [
 	"Alert",
@@ -73,6 +68,7 @@ const style = {
 	borderRadius: "5px",
 	boxShadow: 24,
 	width: "250px",
+	height: "100px",
 };
 
 const PreRegistrationForm = () => {
@@ -80,6 +76,7 @@ const PreRegistrationForm = () => {
 	const [expanded, setExpanded] = React.useState("");
 	const [gender, setGender] = React.useState("");
 	const [open, setOpen] = React.useState(false);
+	const [loading, setLoading] = React.useState(false);
 	const [code, setCode] = React.useState({
 		backgroundColor: "",
 		fontWeight: "bold",
@@ -123,13 +120,15 @@ const PreRegistrationForm = () => {
 				item
 				sx={{
 					// backgroundColor: "yellow",
+					height: "100%",
 					width: "100%",
 					overflowY: "auto",
 					pt: 4,
 					pl: 2,
 					pr: 2,
+					mb: 16,
 				}}
-				xs={10}
+				// xs={10}
 			>
 				<Grid
 					container
@@ -314,98 +313,116 @@ const PreRegistrationForm = () => {
 					// height: "80px",
 					// backgroundColor: "green",
 					width: "100%",
+					position: "absolute",
+					bottom: 0,
 				}}
-				xs={2}
 			>
-				<Grid
-					container
-					direction="column"
-					justifyContent="flex-end"
-					alignItems="center"
-					sx={{ width: "100%", height: "100%", p: 2 }}
-				>
-					<Grid item sx={{ width: "100%", mb: 2 }}>
-						<Button
-							variant="text"
-							size="large"
-							onClick={handleOpen}
-							sx={{ width: "100%", ...code }}
-						>
-							Patient's Severity Code
-						</Button>
-						<Modal open={open} onClose={handleClose}>
-							<Box sx={style}>
-								<List>
-									<ListItem disablePadding>
-										<ListItemButton
+				<Paper elevation={16}>
+					{loading ? <LinearProgress /> : null}
+					<Grid
+						container
+						direction="column"
+						justifyContent="flex-end"
+						alignItems="center"
+						sx={{ width: "100%", height: "100%", p: 2 }}
+					>
+						<Grid item sx={{ width: "100%", mb: 2 }}>
+							<Button
+								variant="text"
+								size="large"
+								onClick={handleOpen}
+								sx={{ width: "100%", ...code }}
+							>
+								Patient's Severity Code
+							</Button>
+							<Modal open={open} onClose={handleClose}>
+								<Grid
+									container
+									direction="row"
+									justifyContent="space-evenly"
+									alignItems="center"
+									sx={style}
+								>
+									<IconButton
+										size="large"
+										onClick={() =>
+											handleCodeChange(
+												"#ed2939",
+												"#d9381e"
+											)
+										}
+									>
+										<Avatar
+											component={Paper}
+											elevation={16}
 											sx={{
 												backgroundColor: "#ed2939",
-												":hover": {
-													backgroundColor: "#d9381e",
-												},
+												color: "#ed2939",
+												height: "52px",
+												width: "52px",
 											}}
-											onClick={() =>
-												handleCodeChange(
-													"#ed2939",
-													"#d9381e"
-												)
-											}
 										>
-											<ListItemText primary="Red" />
-										</ListItemButton>
-									</ListItem>
-
-									<ListItem disablePadding>
-										<ListItemButton
+											.
+										</Avatar>
+									</IconButton>
+									<IconButton
+										size="large"
+										onClick={() =>
+											handleCodeChange(
+												"#ffe135",
+												"#ffda03"
+											)
+										}
+									>
+										<Avatar
+											component={Paper}
+											elevation={16}
 											sx={{
 												backgroundColor: "#ffe135",
-												":hover": {
-													backgroundColor: "#ffda03",
-												},
+												color: "#ffe135",
+												height: "52px",
+												width: "52px",
 											}}
-											onClick={() =>
-												handleCodeChange(
-													"#ffe135",
-													"#ffda03"
-												)
-											}
 										>
-											<ListItemText primary="Yellow" />
-										</ListItemButton>
-									</ListItem>
-
-									<ListItem disablePadding>
-										<ListItemButton
+											.
+										</Avatar>
+									</IconButton>
+									<IconButton
+										size="large"
+										onClick={() =>
+											handleCodeChange(
+												"#60a917",
+												"#138808"
+											)
+										}
+									>
+										<Avatar
+											component={Paper}
+											elevation={16}
 											sx={{
 												backgroundColor: "#60a917",
-												":hover": {
-													backgroundColor: "#138808",
-												},
+												color: "#60a917",
+												height: "52px",
+												width: "52px",
 											}}
-											onClick={() =>
-												handleCodeChange(
-													"#60a917",
-													"#138808"
-												)
-											}
 										>
-											<ListItemText primary="Green" />
-										</ListItemButton>
-									</ListItem>
-								</List>
-							</Box>
-						</Modal>
+											.
+										</Avatar>
+									</IconButton>
+								</Grid>
+							</Modal>
+						</Grid>
+						<Grid item sx={{ width: "100%" }}>
+							<Button
+								size="large"
+								variant="contained"
+								sx={{ width: "100%" }}
+							>
+								Register
+							</Button>
+						</Grid>
 					</Grid>
-					<Grid item sx={{ width: "100%" }}>
-						<Button
-							size="large"
-							variant="contained"
-							sx={{ width: "100%" }}
-						>
-							Register
-						</Button>
-					</Grid>
-				</Grid>
+				</Paper>
 			</Grid>
 		</Grid>
 	);
