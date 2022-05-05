@@ -34,8 +34,8 @@ app.use((err, req, res, next) => {
 		default:
 			res.status(500).send({ msg: 'Internal Server Error' });
 	}
-})
+});
 
 app.listen(port, () => {
 	console.log(`Server started on port ${port} `);
-})
+});

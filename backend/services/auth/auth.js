@@ -19,13 +19,13 @@ const registerEmployee = asyncHandler(async (req, res, next) =>{
         req.body.email,
         req.body.password,
         req.body.designation
-    )
+    );
     
     if(!employee.isValid()){
-       return next(new Error(400))
+       return next(new Error(400));
     }
         
-    const st = await EmployeeRepo.employeeExists(employee.id,employee.email)
+    const st = await EmployeeRepo.employeeExists(employee.id,employee.email);
     if(st != 0){
         switch(st){
             case 'id_email':
@@ -38,14 +38,14 @@ const registerEmployee = asyncHandler(async (req, res, next) =>{
     }
 
     //Hash password
-    const salt = await bcrypt.genSalt(10)
-    employee.password = await bcrypt.hash(employee.password, salt)
+    const salt = await bcrypt.genSalt(10);
+    employee.password = await bcrypt.hash(employee.password, salt);
 
-    await EmployeeRepo.registerEmployee(employee)
+    await EmployeeRepo.registerEmployee(employee);
 
     res.status(200).json({
         'msg': 'Successfully registered'
-    })
+    });
     
 })
  
@@ -55,21 +55,21 @@ const registerEmployee = asyncHandler(async (req, res, next) =>{
 
 const loginEmployee = asyncHandler(async (req, res, next) =>{
 
-    const {id, password} = req.body
+    const {id, password} = req.body;
 
-    const employee = await EmployeeRepo.findEmployee(id)
+    const employee = await EmployeeRepo.findEmployee(id);
 
     if(employee && (await bcrypt.compare(password, employee.password))){
         res.json({
             _id: employee.id,
             desgination: employee.designation,
            msg: `Welcome ${employee.firstName}`
-        })
+        });
     } else{
-        next(new Error(400))
+        next(new Error(400));
     }
 
-})
+});
 
 module.exports = {
     registerEmployee,
