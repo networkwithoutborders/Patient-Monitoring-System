@@ -11,7 +11,7 @@ EmployeeRepo.registerEmployee = async function(Employee){
     }
 
 EmployeeRepo.employeeExists = async function(id, email){
-        const res = await db.query('select * from employee where id = $1 or email = $2;', [id, email])
+        const res = await db.query('select * from employee where id = $1 or email = $2;', [id, email]);
         if(res.rowCount == 0){
             return '';
         }else{
