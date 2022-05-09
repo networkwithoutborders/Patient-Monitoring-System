@@ -47,7 +47,7 @@ const registerEmployee = asyncHandler(async (req, res, next) =>{
         'msg': 'Successfully registered'
     });
     
-})
+});
  
 // @desc Authenticate a Employee
 // @route POST api/Employee/login
@@ -74,4 +74,4 @@ const loginEmployee = asyncHandler(async (req, res, next) =>{
 module.exports = {
     registerEmployee,
     loginEmployee
-}
+};
