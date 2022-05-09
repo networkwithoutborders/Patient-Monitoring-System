@@ -11,7 +11,7 @@ class Employee {
         gender,
         email,
         password,
-        designation
+        userType
     ){
         this.id = id
         this.firstName = firstName
@@ -19,7 +19,7 @@ class Employee {
         this.gender = gender
         this.email = email
         this.password = password
-        this.designation = designation
+        this.userType = userType
         
     }
 

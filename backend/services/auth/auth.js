@@ -18,7 +18,7 @@ const registerEmployee = asyncHandler(async (req, res, next) =>{
         req.body.gender,
         req.body.email,
         req.body.password,
-        req.body.designation
+        req.body.user_type
     );
     
     if(!employee.isValid()){
@@ -61,9 +61,9 @@ const loginEmployee = asyncHandler(async (req, res, next) =>{
 
     if(employee && (await bcrypt.compare(password, employee.password))){
         res.json({
-            _id: employee.id,
-            desgination: employee.designation,
-           msg: `Welcome ${employee.firstName}`
+            id: employee.id,
+            user_type: employee.userType,
+            name: employee.firstName
         });
     } else{
         next(new Error(400));
