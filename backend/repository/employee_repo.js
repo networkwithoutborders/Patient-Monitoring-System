@@ -1,5 +1,4 @@
 const db = require('../database/postgres')
-const Employee = require('../models/Employee')
 
 const EmployeeRepo = {}
 
@@ -12,11 +11,11 @@ const EmployeeRepo = {}
     5) mod
 */
 
-EmployeeRepo.registerEmployee = async function(Employee){
+EmployeeRepo.registerEmployee = async function(employee){
     const res = await db.query(`insert into employee(id, first_name, last_name, gender, email, password, user_type)
     select $1, $2, $3, $4, $5, $6, type_id from user_types where type = $7 ;`, 
-    [Employee.id, Employee.firstName, Employee.lastName, Employee.gender,
-    Employee.email, Employee.password, Employee.userType]);
+    [employee.id, employee.firstName, employee.lastName, employee.gender,
+    employee.email, employee.password, employee.userType]);
     if(!res.rowCount) throw new Error('Invalid user_type')
         
 }

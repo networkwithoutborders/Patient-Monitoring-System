@@ -1,7 +1,7 @@
 const express = require('express')
 const bcrypt = require('bcryptjs')
 const Employee = require('../../models/Employee')
-const EmployeeRepo = require('../../repository/Employee_repo')
+const EmployeeRepo = require('../../repository/employee_repo')
 const asyncHandler = require('express-async-handler')
 const {DUPLICATE_ENTRY, DUPLICATE_EMAIL, DUPLICATE_ID} = require('../../utils/const')
 
