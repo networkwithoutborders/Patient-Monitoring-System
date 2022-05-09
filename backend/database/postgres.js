@@ -13,16 +13,26 @@ const pool = new Pool({
 
 pool.query('select now()', (err, res) => {
     tables();
-    console.log('Database Started Successfully!!');
+    console.log('Database Connected Successfully!!');
 });
 
 
-function tables(){
+async function tables(){
 
     // For storing the type of users such as doctor, pramedic, etc.
-    pool.query(`create table if not exists user_types(
+    await pool.query(`create table if not exists user_types(
         type_id serial primary key,
         type varchar(20));`);
+
+    const res = await pool.query(`select count(*) from user_types`)
+    if(res.rows[0].count == 0){
+        pool.query(`insert into user_types(type) values
+        ('doctor'),
+        ('paramedic'),
+        ('nurse'),
+        ('emt'),
+        ('mod')`)
+    };
 
     // For employee table
     pool.query(`create table if not exists employee(
