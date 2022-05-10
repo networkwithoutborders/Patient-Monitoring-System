@@ -7,7 +7,7 @@ const {DUPLICATE_ENTRY, DUPLICATE_EMAIL, DUPLICATE_ID} = require('../../utils/co
 
 
 // @desc Register Employee
-// @route POST auth/register
+// @route POST api/Employee/
 // @access Public
 
 const registerEmployee = asyncHandler(async (req, res, next) =>{
@@ -50,7 +50,7 @@ const registerEmployee = asyncHandler(async (req, res, next) =>{
 });
  
 // @desc Authenticate a Employee
-// @route POST auth/login
+// @route POST api/Employee/login
 // @access Public
 
 const loginEmployee = asyncHandler(async (req, res, next) =>{
