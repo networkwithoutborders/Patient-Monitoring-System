@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs')
 const Employee = require('../../models/Employee')
 const EmployeeRepo = require('../../repository/employee_repo')
 const asyncHandler = require('express-async-handler')
+const tokenGen = require('./tokens')
 const {DUPLICATE_ENTRY, DUPLICATE_EMAIL, DUPLICATE_ID} = require('../../utils/const')
 
 
@@ -10,7 +11,7 @@ const {DUPLICATE_ENTRY, DUPLICATE_EMAIL, DUPLICATE_ID} = require('../../utils/co
 // @route POST auth/register
 // @access Public
 
-const registerEmployee = asyncHandler(async (req, res, next) =>{
+const registerEmployee = asyncHandler(async (req, res) =>{
     const employee = new Employee(
         req.body.id,
         req.body.firstName,
@@ -22,9 +23,9 @@ const registerEmployee = asyncHandler(async (req, res, next) =>{
     );
     
     if(!employee.isValid()){
-       return next(new Error(400));
+       throw new Error(400);
     }
-        
+
     const st = await EmployeeRepo.employeeExists(employee.id,employee.email);
     if(st != 0){
         switch(st){
@@ -53,21 +54,29 @@ const registerEmployee = asyncHandler(async (req, res, next) =>{
 // @route POST auth/login
 // @access Public
 
-const loginEmployee = asyncHandler(async (req, res, next) =>{
+const loginEmployee = asyncHandler(async (req, res) =>{
 
     const {id, password} = req.body;
 
     const employee = await EmployeeRepo.findEmployee(id);
 
+    const payload = {
+        user_id: employee.id,
+        user_type: employee.userType,
+    }
+
     if(employee && (await bcrypt.compare(password, employee.password))){
         res.json({
             id: employee.id,
             user_type: employee.userType,
-            name: employee.firstName
+            name: employee.firstName,
+            access_token: await tokenGen.generateAcessToken(payload),
+            refresh_token: await tokenGen.generateRefreshToken(payload)
         });
     } else{
-        next(new Error(400));
+        throw new Error(400);
     }
+
 
 });
 
