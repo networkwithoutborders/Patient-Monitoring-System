@@ -19,20 +19,12 @@ app.all('/', (req, res) =>{
 app.use((err, req, res, next) => {
 	console.log(err);
 	switch (err.message) {
-		case errorConstant.DUPLICATE_ENTRY:
-			res.status(400).send({msg: 'Duplicate id and email'});
-			break;
-		case errorConstant.DUPLICATE_EMAIL:
-			res.status(400).send({msg: 'Duplicate email'});
-			break;
-		case errorConstant.DUPLICATE_ID:
-			res.status(400).send({msg: 'Duplicate id'});
-			break;
 		case '400':
 			res.status(400).send({ msg: 'Invalid Authentication' });
 			break;
 		case '401':
 			res.status(401).send({msg: 'Tokens Expired'})
+			break;
 		default:
 			res.status(500).send({ msg: 'Internal Server Error' });
 	}

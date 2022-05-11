@@ -1,5 +1,5 @@
 module.exports = {
-    DUPLICATE_ENTRY: 'Duplicate Entry',
+    DUPLICATE_ENTRY: 'Duplicate email and id',
     DUPLICATE_ID: 'Duplicate id',
-    DUPLICATE_EMAIL: 'Duplicate Email',
+    DUPLICATE_EMAIL: 'Duplicate email',
 };

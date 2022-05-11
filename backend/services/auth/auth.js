@@ -27,16 +27,10 @@ const registerEmployee = asyncHandler(async (req, res) =>{
     }
 
     const st = await EmployeeRepo.employeeExists(employee.id,employee.email);
-    if(st != 0){
-        switch(st){
-            case 'id_email':
-                throw new Error(DUPLICATE_ENTRY);
-            case 'id':
-                throw new Error(DUPLICATE_ID);
-            case 'email':
-                throw new Error(DUPLICATE_EMAIL);
-        }
-    }
+    if(st){
+        res.status(400).send({msg: st});
+        return;
+    }   
 
     //Hash password
     const salt = await bcrypt.genSalt(10);

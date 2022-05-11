@@ -31,7 +31,7 @@ const generateNewTokens = asyncHandler(async (req, res)=>{
     const authHeader =  req.headers['authorization']
     const refreshToken = authHeader && authHeader.split(' ')[1]
     if(!refreshToken){
-        throw new Error(401)
+        throw new Error(401);
     }
 
     try {

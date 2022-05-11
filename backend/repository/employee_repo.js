@@ -1,4 +1,5 @@
-const db = require('../database/postgres')
+const db = require('../database/postgres');
+const { DUPLICATE_ENTRY, DUPLICATE_EMAIL, DUPLICATE_ID } = require('../utils/const');
 
 const EmployeeRepo = {}
 
@@ -26,11 +27,11 @@ EmployeeRepo.employeeExists = async function(id, email){
         return '';
     }else{
         if(id == res.rows[0].id && email == res.rows[0].email){
-            return 'id_email';
+            return DUPLICATE_ENTRY;
         } else if (email == res.rows[0].email){
-            return 'email';
+            return DUPLICATE_EMAIL;
         } else {
-            return 'id';
+            return DUPLICATE_ID;
         }
     }
 }
