@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Routes, Route, NavLink } from "react-router-dom";
 
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -17,14 +17,16 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import StoreIcon from "@mui/icons-material/Store";
-import SellIcon from "@mui/icons-material/Sell";
 import HistoryIcon from "@mui/icons-material/History";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LoginIcon from "@mui/icons-material/Login";
+import InfoIcon from "@mui/icons-material/Info";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 
 import PreRegistrationForm from "../components/PreRegistrationForm/PreRegistrationForm";
+import ParamedicHistory from "./ParamedicHistory";
+import ParamedicProfile from "./ParamedicProfile";
 
 const drawerWidth = 240;
 
@@ -56,6 +58,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 const PreRegistration = () => {
 	const theme = useTheme();
+	const [title, setTitle] = React.useState("Pre Registration");
 	const [open, setOpen] = React.useState(false);
 	const [isLoggedIn] = React.useState(true);
 	const [state, setState] = React.useState({
@@ -120,8 +123,11 @@ const PreRegistration = () => {
 			<List>
 				<NavLink
 					style={({ isActive }) => {
+						if (isActive) {
+							setTitle("Pre Registration");
+						}
 						return {
-							color: isActive ? "#03045e" : "#424242",
+							color: isActive ? "#03045e" : "black",
 							textDecoration: "none",
 						};
 					}}
@@ -129,7 +135,7 @@ const PreRegistration = () => {
 				>
 					<ListItem button>
 						<ListItemIcon>
-							<StoreIcon />
+							<BorderColorIcon />
 						</ListItemIcon>
 						<ListItemText
 							primary="Pre Registration"
@@ -141,16 +147,19 @@ const PreRegistration = () => {
 				</NavLink>
 				<NavLink
 					style={({ isActive }) => {
+						if (isActive) {
+							setTitle("Profile");
+						}
 						return {
 							color: isActive ? "#03045e" : "black",
 							textDecoration: "none",
 						};
 					}}
-					to={`/`}
+					to={`/paramedic/profile/:id`}
 				>
 					<ListItem button>
 						<ListItemIcon>
-							<SellIcon />
+							<InfoIcon />
 						</ListItemIcon>
 						<ListItemText
 							primary="Profile"
@@ -165,12 +174,15 @@ const PreRegistration = () => {
 			<List>
 				<NavLink
 					style={({ isActive }) => {
+						if (isActive) {
+							setTitle("History");
+						}
 						return {
 							color: isActive ? "#03045e" : "black",
 							textDecoration: "none",
 						};
 					}}
-					to={`/`}
+					to={`/paramedic/patient-history`}
 				>
 					<ListItem button>
 						<ListItemIcon>
@@ -263,7 +275,7 @@ const PreRegistration = () => {
 						component="div"
 						sx={{ ml: -4 }}
 					>
-						Pre Registration
+						{title}
 					</Typography>
 				</Toolbar>
 			</AppBar>
@@ -287,7 +299,18 @@ const PreRegistration = () => {
 				}}
 			>
 				{/* <DrawerHeader /> */}
-				<PreRegistrationForm />
+				<Routes>
+					<Route
+						path="pre-registration"
+						element={<PreRegistrationForm />}
+					/>
+					<Route
+						path="patient-history"
+						element={<ParamedicHistory />}
+					/>
+					<Route path="profile/:id" element={<ParamedicProfile />} />
+				</Routes>
+				{/* <PreRegistrationForm /> */}
 			</Box>
 		</Box>
 	);

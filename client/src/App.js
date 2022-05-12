@@ -13,10 +13,7 @@ function App() {
 			<Route path="/registration" element={<Registration />} />
 			<Route path="/" element={<HomeScreen />} />
 			<Route path="/signIn" element={<SignIn />} />
-			<Route
-				path="/paramedic/pre-registration"
-				element={<PreRegistration />}
-			/>
+			<Route path="/paramedic/*" element={<PreRegistration />} />
 			<Route path="/patient/QR/:id" element={<PatientQrCode />} />
 		</Routes>
 	);
