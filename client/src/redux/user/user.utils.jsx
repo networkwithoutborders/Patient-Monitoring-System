@@ -1,9 +1,21 @@
+import * as API from "../../api/index";
+
 export const setUserType = (type) => {
 	return type;
 };
 
-export const loginUser = (username, password) => {
-	console.log(username, password);
+export const loginUser = async (username, password, userType) => {
+	// console.log(username, password);
+	const credentials = {
+		id: username,
+		password: password,
+		user_type: userType,
+	};
 
-	return { username, password };
+	let data = null;
+	await API.loginUser(credentials)
+		.then((response) => (data = response.data))
+		.catch((error) => console.log("error"));
+
+	return data;
 };

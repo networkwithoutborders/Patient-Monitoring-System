@@ -49,13 +49,13 @@ const SignIn = ({ userType }) => {
 	const handleSubmit = () => {
 		setOpen(true);
 		// navigate(`/${role.toLocaleLowerCase()}`);
-		if (role === "paramedic") {
-			navigate(`/${role.toLocaleLowerCase()}/pre-registration`);
-		}
-		dispatch(userLogin(username, values.password))
+		// if (role === "paramedic") {
+		// 	navigate(`/${role.toLocaleLowerCase()}/pre-registration`);
+		// }
+		dispatch(userLogin(username, values.password, role))
 			.then((response) => {
-				console.log(response);
-				if (role === "Paramedic") {
+				// console.log(response);
+				if (response.payload && role === "paramedic") {
 					navigate(`/${role.toLocaleLowerCase()}/pre-registration`);
 				}
 				setOpen(false);

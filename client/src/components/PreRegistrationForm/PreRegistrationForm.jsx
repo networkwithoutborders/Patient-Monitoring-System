@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { Grid, Button, Paper, IconButton, Avatar, Stack } from "@mui/material";
 import TextField from "@mui/material/TextField";
@@ -15,6 +17,8 @@ import Typography from "@mui/material/Typography";
 import Autocomplete from "@mui/material/Autocomplete";
 import Modal from "@mui/material/Modal";
 import LinearProgress from "@mui/material/LinearProgress";
+
+import { registerNewPatient } from "../../redux/registerPatient/registerPatient.action";
 
 const AVPUoptions = [
 	"Alert",
@@ -72,7 +76,10 @@ const style = {
 };
 
 const PreRegistrationForm = () => {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const [idType, setIdType] = React.useState("Phone Number");
+	const [idNumber, setIdNumber] = React.useState("");
 	const [expanded, setExpanded] = React.useState("");
 	const [gender, setGender] = React.useState("");
 	const [open, setOpen] = React.useState(false);
@@ -81,6 +88,7 @@ const PreRegistrationForm = () => {
 		backgroundColor: "",
 		fontWeight: "bold",
 	});
+	const access_token = useSelector((state) => state.userReducer.access_token);
 
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -105,6 +113,21 @@ const PreRegistrationForm = () => {
 			": hover": {
 				backgroundColor: c2,
 			},
+		});
+	};
+
+	const handleSubmit = () => {
+		// console.log(access_token);
+		const form = {
+			id_type: idType,
+			id_number: idNumber,
+			gender,
+			code: code.backgroundColor,
+		};
+		setLoading(true);
+		// navigate("/patient/QR/:id");
+		dispatch(registerNewPatient(form, access_token)).then((response) => {
+			navigate("/patient/QR/:id");
 		});
 	};
 
@@ -168,6 +191,10 @@ const PreRegistrationForm = () => {
 							fullWidth
 							label={`Enter Patient ${idType}`}
 							variant="outlined"
+							value={idNumber}
+							onChange={(e) => {
+								setIdNumber(e.target.value);
+							}}
 						/>
 					</Grid>
 
@@ -420,6 +447,7 @@ const PreRegistrationForm = () => {
 								size="large"
 								variant="contained"
 								sx={{ width: "100%" }}
+								onClick={handleSubmit}
 							>
 								Register
 							</Button>
