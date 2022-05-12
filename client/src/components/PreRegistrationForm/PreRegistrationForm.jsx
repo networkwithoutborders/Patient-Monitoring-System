@@ -110,7 +110,7 @@ const PreRegistrationForm = () => {
 
 	return (
 		<Stack
-			container
+			container="true"
 			direction="column"
 			justifyContent="space-between"
 			alignItems="center"

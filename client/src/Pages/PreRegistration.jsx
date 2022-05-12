@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, NavLink } from "react-router-dom";
+import { Routes, Route, NavLink, useNavigate } from "react-router-dom";
 
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -58,6 +58,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 const PreRegistration = () => {
 	const theme = useTheme();
+	const navigate = useNavigate();
 	const [title, setTitle] = React.useState("Pre Registration");
 	const [open, setOpen] = React.useState(false);
 	const [isLoggedIn] = React.useState(true);
@@ -82,6 +83,10 @@ const PreRegistration = () => {
 	const handleDrawerClose = () => {
 		setOpen(false);
 	};
+
+	// React.useEffect(() => {
+	// 	navigate("pre-registration");
+	// }, []);
 
 	const list = (anchor) => (
 		<Box
@@ -207,6 +212,7 @@ const PreRegistration = () => {
 						width: "inherit",
 					}}
 					onClick={() => {
+						navigate("/");
 						console.log("sign out");
 					}}
 				>

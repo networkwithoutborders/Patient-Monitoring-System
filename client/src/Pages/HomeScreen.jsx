@@ -1,5 +1,8 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
+import { setUserType } from "../redux/user/user.action";
 
 import { Grid, Typography, Button } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -8,6 +11,12 @@ import { ReactComponent as Logo } from "../assets/undraw_doctors_hwty.svg";
 
 const HomeScreen = () => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
+	const handleSelectRole = (role) => {
+		dispatch(setUserType(role));
+		navigate(`/${role.toLocaleLowerCase()}/signIn`);
+	};
 
 	return (
 		<Grid
@@ -65,6 +74,7 @@ const HomeScreen = () => {
 					</Grid>
 					<Grid item xs={12}>
 						<Button
+							onClick={() => handleSelectRole("Doctor")}
 							size="large"
 							sx={{
 								mt: 0.5,
@@ -105,9 +115,7 @@ const HomeScreen = () => {
 							}}
 							variant="outlined"
 							endIcon={<ArrowForwardIosIcon />}
-							onClick={() => {
-								navigate("/signIn");
-							}}
+							onClick={() => handleSelectRole("Paramedic")}
 						>
 							Paramedic
 						</Button>
@@ -130,6 +138,7 @@ const HomeScreen = () => {
 							}}
 							variant="outlined"
 							endIcon={<ArrowForwardIosIcon />}
+							onClick={() => handleSelectRole("Nurse")}
 						>
 							Nurse
 						</Button>
@@ -152,6 +161,7 @@ const HomeScreen = () => {
 							}}
 							variant="outlined"
 							endIcon={<ArrowForwardIosIcon />}
+							onClick={() => handleSelectRole("EMT")}
 						>
 							EMT
 						</Button>
@@ -174,6 +184,7 @@ const HomeScreen = () => {
 							}}
 							variant="outlined"
 							endIcon={<ArrowForwardIosIcon />}
+							onClick={() => handleSelectRole("MOD")}
 						>
 							MOD
 						</Button>

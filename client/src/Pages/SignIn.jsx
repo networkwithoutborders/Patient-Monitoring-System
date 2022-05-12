@@ -1,5 +1,6 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 
 import {
 	Grid,
@@ -13,13 +14,21 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
-const SignIn = () => {
+import { userLogin } from "../redux/user/user.action";
+
+const SignIn = ({ userType }) => {
+	const { role } = useParams();
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const [username, setUsername] = React.useState("");
 	const [values, setValues] = React.useState({
 		password: "",
 		showPassword: false,
 	});
+	const [open, setOpen] = React.useState(false);
 
 	const handleChange = (prop) => (event) => {
 		setValues({ ...values, [prop]: event.target.value });
@@ -32,6 +41,29 @@ const SignIn = () => {
 	};
 	const handleMouseDownPassword = (event) => {
 		event.preventDefault();
+	};
+	const handleUsernameChange = (e) => {
+		setUsername(e.target.value);
+	};
+
+	const handleSubmit = () => {
+		setOpen(true);
+		// navigate(`/${role.toLocaleLowerCase()}`);
+		if (role === "paramedic") {
+			navigate(`/${role.toLocaleLowerCase()}/pre-registration`);
+		}
+		dispatch(userLogin(username, values.password))
+			.then((response) => {
+				console.log(response);
+				if (role === "Paramedic") {
+					navigate(`/${role.toLocaleLowerCase()}/pre-registration`);
+				}
+				setOpen(false);
+			})
+			.catch((error) => {
+				console.log("error");
+				setOpen(false);
+			});
 	};
 
 	return (
@@ -95,6 +127,8 @@ const SignIn = () => {
 					<Grid item xs={12}>
 						<TextField
 							fullWidth
+							onChange={handleUsernameChange}
+							value={username}
 							InputProps={{
 								endAdornment: (
 									<InputAdornment
@@ -183,10 +217,21 @@ const SignIn = () => {
 						},
 					}}
 					fullWidth
+					onClick={handleSubmit}
 				>
 					Login
 				</Button>
 			</Grid>
+
+			<Backdrop
+				sx={{
+					color: "#fff",
+					zIndex: (theme) => theme.zIndex.drawer + 1,
+				}}
+				open={open}
+			>
+				<CircularProgress color="inherit" />
+			</Backdrop>
 		</Grid>
 	);
 };
