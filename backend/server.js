@@ -19,7 +19,8 @@ app.use(express.urlencoded({ extended: false }));
 
 
 app.use('/auth', require('./routes/auth_route'));
-app.use('/patient', require('./routes/patient_route'))
+app.use('/patient', require('./routes/patient_route'));
+app.use('/employee', require('./routes/employee_route'));
 
 app.all('/', (req, res) =>{
 	res.send('I am ready XD');

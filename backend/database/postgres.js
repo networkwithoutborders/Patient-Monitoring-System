@@ -2,9 +2,9 @@ const {Pool} = require('pg');
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
-    // ssl: {
-    //     rejectUnauthorized: false
-    // }
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 pool.query('select now()', (err, res) => {
@@ -39,9 +39,24 @@ async function tables(){
         password varchar(128),
         user_type int,
         gender varchar(1),
+        primary_contact int,
+        secondary_contact int,
         constraint fk_user_type foreign key(user_type) references
         user_types(type_id));`);
+       
+        
+    await pool.query(`create table if not exists id_types(
+        id serial primary key, 
+        type varchar(20));`);
 
+    res = await pool.query(`select count(*) from id_types`)
+    if(res.rows[0].count == 0){
+        pool.query(`insert into id_types(type) values
+        ('phone_number'),
+        ('adhar_number'),
+        ('driving_license'),
+        ('pan')`)
+    };
 
     await pool.query(`create table if not exists patient(
         uid serial primary key, 
@@ -55,18 +70,10 @@ async function tables(){
         default (now() at time zone 'utc'), 
         constraint fk_employee_uid foreign key(employee_uid) 
         references employee(uid));`);
-    
-    await pool.query(`create table if not exists id_types(
-        id serial primary key, 
-        type varchar(20));`);
 
-    res = await pool.query(`select count(*) from id_types`)
+    res = await pool.query(`select count(*) from patient`)
     if(res.rows[0].count == 0){
-        pool.query(`insert into id_types(type) values
-        ('phone_number'),
-        ('adhar_number'),
-        ('driving_license'),
-        ('pan')`)
+        pool.query(`select setval('patient_uid_seq', 100000);`)
     };
 
     await pool.query(`create table if not exists patient_id(
@@ -87,7 +94,6 @@ async function tables(){
         cbg float4, 
         spo2 float4, 
         constraint fk_patient_uid foreign key (patient_uid) references patient(uid));`);
-
 
 }
 

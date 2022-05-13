@@ -1,8 +1,8 @@
-const bcrypt = require('bcryptjs')
-const Employee = require('../../models/Employee')
-const EmployeeRepo = require('../../repository/employee_repo')
-const asyncHandler = require('express-async-handler')
-const tokenGen = require('./tokens')
+const bcrypt = require('bcryptjs');
+const Employee = require('../../models/Employee');
+const EmployeeRepo = require('../../repository/employee_repo');
+const asyncHandler = require('express-async-handler');
+const tokenGen = require('./tokens');
 
 
 // @desc Register Employee
@@ -10,14 +10,18 @@ const tokenGen = require('./tokens')
 // @access Public
 
 const registerEmployee = asyncHandler(async (req, res) =>{
+
+    let contacts = req.body.contacts;
     const employee = new Employee(
         req.body.uid,
-        req.body.firstName,
-        req.body.lastName, 
+        req.body.first_name,
+        req.body.last_name, 
         req.body.gender,
         req.body.email,
         req.body.password,
-        req.body.user_type
+        req.body.user_type,
+        contacts.primary_contact,
+        contacts.secondary_contact,
     );
     
     if(!employee.isValid()){
@@ -57,13 +61,13 @@ const loginEmployee = asyncHandler(async (req, res) =>{
     }
 
     const payload = {
-        user_id: employee.uid,
+        uid: employee.uid,
         user_type: employee.userType,
     };
 
     if (await bcrypt.compare(password, employee.password)){
         res.json({
-            id: employee.uid,
+            uid: employee.uid,
             user_type: employee.userType,
             name: employee.firstName,
             access_token: await tokenGen.generateAcessToken(payload),

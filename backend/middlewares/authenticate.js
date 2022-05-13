@@ -6,7 +6,7 @@ const accessTokenKey = process.env.ACCESS_TOKEN_KEY;
 
 /**
  * req.key will contain =>
- * user_id => to denote which user has sent the request
+ * uid => to denote which user has sent the request
  * user_type => to denote the type of user who has sent the request
  */
 

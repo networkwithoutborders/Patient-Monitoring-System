@@ -1,4 +1,5 @@
 const db = require('../database/postgres');
+const Employee = require('../models/Employee');
 const { DUPLICATE_ENTRY, DUPLICATE_EMAIL, DUPLICATE_ID } = require('../utils/const');
 
 const EmployeeRepo = {}
@@ -13,10 +14,12 @@ const EmployeeRepo = {}
 */
 
 EmployeeRepo.registerEmployee = async function(employee){
-    const res = await db.query(`insert into employee(uid, first_name, last_name, gender, email, password, user_type)
-    select $1, $2, $3, $4, $5, $6, type_id from user_types where type = $7 ;`, 
+    const res = await db.query(`insert into employee(uid, first_name, last_name, 
+        gender, email, password, user_type, primary_contact, secondary_contact)
+    select $1, $2, $3, $4, $5, $6, type_id, $8, $9 from user_types where type = $7 ;`, 
     [employee.uid, employee.firstName, employee.lastName, employee.gender,
-    employee.email, employee.password, employee.userType]);
+    employee.email, employee.password, employee.userType, employee.primaryContact,
+        employee.secondaryContact]);
     if(!res.rowCount) throw new Error('Invalid user_type')
         
 }
@@ -43,12 +46,35 @@ EmployeeRepo.findEmployee = async function(uid){
     if(res.rowCount == 0) return null
     const u = res.rows[0];
     return {
-        id: u.id,
+        uid: u.uid,
         firstName: u.first_name,
         password: u.password,
         userType: u.type,
     };
    
+}
+
+EmployeeRepo.findProfile = async function(uid){
+    const res = await db.query(`select * from employee where uid = $1`, [uid]);
+    const row = res.rows[0];
+    return new Employee(
+        row.uid,
+        row.first_name,
+        row.last_name,
+        row.gender,
+        row.email,
+        undefined,
+        row.user_type,
+        row.primary_contact,
+        row.secondary_contact,
+    );
+}
+
+EmployeeRepo.listPatients = async function(uid){
+    const res = await db.query(`select visit_time, uid, severity from patient
+    where employee_uid = $1`, [uid]);
+    
+    return res.rows;
 }
 
 

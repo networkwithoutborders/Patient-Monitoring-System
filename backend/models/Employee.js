@@ -11,15 +11,19 @@ class Employee {
         gender,
         email,
         password,
-        userType
+        userType,
+        primaryContact,
+        secondaryContact,
     ){
         this.uid = uid
-        this.firstName = firstName
-        this.lastName = lastName
-        this.gender = gender
-        this.email = email
-        this.password = password
-        this.userType = userType
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.email = email;
+        this.password = password;
+        this.userType = userType;
+        this.primaryContact = primaryContact;
+        this.secondaryContact = secondaryContact;
         
     }
 

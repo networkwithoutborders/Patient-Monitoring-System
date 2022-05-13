@@ -1,11 +1,10 @@
 const asyncHandler = require('express-async-handler');
-const res = require('express/lib/response');
 const { Patient, PatientId, PatientVitals } = require('../../models/Patient');
 const PatientRepo = require('../../repository/patient_repo');
 
 const registerPatient = asyncHandler(async (req, res) => {
     const body = req.body;
-    const { user_id } = req.key;
+    const { uid } = req.key;
 
     const patientId = new PatientId(
         body.id_num,
@@ -17,7 +16,7 @@ const registerPatient = asyncHandler(async (req, res) => {
         details.name,
         details.age,
         details.gender,
-        user_id,
+        uid,
         body.avpu,
         body.severity
     );

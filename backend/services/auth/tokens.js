@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken')
-const asyncHandler = require('express-async-handler')
+const jwt = require('jsonwebtoken');
+const asyncHandler = require('express-async-handler');
 
 const accessTokenKey = process.env.ACCESS_TOKEN_KEY;
 const refreshTokenKey = process.env.REFRESH_TOKEN_KEY;
