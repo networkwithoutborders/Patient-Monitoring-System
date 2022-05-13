@@ -11,7 +11,7 @@ https://pacific-garden-92293.herokuapp.com/
 
 /auth/gentoken (GET) -  Send "Bearer" keyword along with refresh token with a space in Authorization part of the request header, to generate a new pair of access token and refresh token when token expiration error occurs (HTTP CODE := 401)
 
-#### For patient regitration
+#### For patient registration
 /patient/register (POST) - To register a new patient. A request of the following form must be sent to the end-point:
 ```
 {
