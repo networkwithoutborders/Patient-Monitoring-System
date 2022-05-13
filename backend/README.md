@@ -55,7 +55,7 @@ https://pacific-garden-92293.herokuapp.com/
 
 ### For employee
 
-/employee/profile/{uid} (GET) - To find the profile of the employee relpace uid with the employee's uid who'se profile you want to search.
+/employee/profile/{uid} (GET) - To find the profile of the employee replace uid with the employee's uid who'se profile you want to search.
 
 /employee/patients (GET) -  Displays a list of patients that the employee is going to provide treatment for.
 
