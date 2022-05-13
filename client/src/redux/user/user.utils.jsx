@@ -7,7 +7,7 @@ export const setUserType = (type) => {
 export const loginUser = async (username, password, userType) => {
 	// console.log(username, password);
 	const credentials = {
-		id: username,
+		uid: username,
 		password: password,
 		user_type: userType,
 	};

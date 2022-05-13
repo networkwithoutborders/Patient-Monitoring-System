@@ -16,8 +16,29 @@ export const registerNewPatient = async (patientDetails, access_token) => {
 	// const { data } = await API.registerPatient(form);
 	// console.log(data);
 
-	const data = await API.preRegisterPatient(patientDetails, access_token);
-	console.log(data);
+	const form = {
+		id_type: patientDetails.id_type,
+		id_num: patientDetails.id_num,
+		details: {
+			name: patientDetails.name,
+			age: patientDetails.age,
+			gender: patientDetails.gender,
+		},
+		avpu: patientDetails.avpu,
+		severity: patientDetails.code,
+		vitals: {
+			bp: 12.3,
+			temperature: 20,
+			pulse: 21.5,
+			pain: 20,
+			respiratory_rate: 35.3,
+			cbg: 231,
+			spo2: "19",
+		},
+	};
 
-	// return data;
+	const { data } = await API.preRegisterPatient(form, access_token);
+	// console.log(data);
+
+	return data;
 };

@@ -126,9 +126,15 @@ const PreRegistrationForm = () => {
 		};
 		setLoading(true);
 		// navigate("/patient/QR/:id");
-		dispatch(registerNewPatient(form, access_token)).then((response) => {
-			navigate("/patient/QR/:id");
-		});
+		dispatch(registerNewPatient(form, access_token))
+			.then((response) => {
+				// console.log(response);
+				navigate(`/patient/QR/${response.payload.patient_uid}`);
+			})
+			.catch((error) => {
+				console.log(error);
+				setLoading(false);
+			});
 	};
 
 	return (
