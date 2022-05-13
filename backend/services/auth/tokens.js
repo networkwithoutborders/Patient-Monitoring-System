@@ -10,7 +10,8 @@ const refreshTokenKey = process.env.REFRESH_TOKEN_KEY;
 async function generateAcessToken(payload){
     const token = await jwt.sign(payload, accessTokenKey, {
         algorithm: 'HS256',
-        expiresIn: '30m'
+        // @TODO - Add this in production stage for security
+        // expiresIn: '30m'
     });
 
     return token;

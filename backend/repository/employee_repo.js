@@ -13,20 +13,20 @@ const EmployeeRepo = {}
 */
 
 EmployeeRepo.registerEmployee = async function(employee){
-    const res = await db.query(`insert into employee(id, first_name, last_name, gender, email, password, user_type)
+    const res = await db.query(`insert into employee(uid, first_name, last_name, gender, email, password, user_type)
     select $1, $2, $3, $4, $5, $6, type_id from user_types where type = $7 ;`, 
-    [employee.id, employee.firstName, employee.lastName, employee.gender,
+    [employee.uid, employee.firstName, employee.lastName, employee.gender,
     employee.email, employee.password, employee.userType]);
     if(!res.rowCount) throw new Error('Invalid user_type')
         
 }
 
-EmployeeRepo.employeeExists = async function(id, email){
-    const res = await db.query('select * from employee where id = $1 or email = $2;', [id, email]);
+EmployeeRepo.employeeExists = async function(uid, email){
+    const res = await db.query('select * from employee where uid = $1 or email = $2;', [uid, email]);
     if(res.rowCount == 0){
-        return '';
+        return null;
     }else{
-        if(id == res.rows[0].id && email == res.rows[0].email){
+        if(uid == res.rows[0].uid && email == res.rows[0].email){
             return DUPLICATE_ENTRY;
         } else if (email == res.rows[0].email){
             return DUPLICATE_EMAIL;
@@ -36,10 +36,10 @@ EmployeeRepo.employeeExists = async function(id, email){
     }
 }
 
-EmployeeRepo.findEmployee = async function(id){
-    const res = await db.query(`select id, first_name, password, type
+EmployeeRepo.findEmployee = async function(uid){
+    const res = await db.query(`select uid, first_name, password, type
      from employee 
-     join user_types on user_type = type_id where id = $1`, [id]);
+     join user_types on user_type = type_id where uid = $1`, [uid]);
     if(res.rowCount == 0) return null
     const u = res.rows[0];
     return {

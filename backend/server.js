@@ -1,15 +1,25 @@
 require('dotenv').config();
+
 const express = require('express');
+const cors = require('cors');
 const errorConstant = require('./utils/const');
 const port = process.env.PORT || 5000;
 
 const app = express();
+
+const corsOpts = {
+	origin: '*',
+
+  };
+  
+app.use(cors(corsOpts));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 
 app.use('/auth', require('./routes/auth_route'));
+app.use('/patient', require('./routes/patient_route'))
 
 app.all('/', (req, res) =>{
 	res.send('I am ready XD');

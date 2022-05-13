@@ -1,11 +1,11 @@
 /**
  * These are the fields that the Employee schema will have in out database
- * subjected to futher chnages
+ * subjected to futher changes.
  */
 
 class Employee {
     constructor(
-        id,
+        uid,
         firstName,
         lastName,
         gender,
@@ -13,7 +13,7 @@ class Employee {
         password,
         userType
     ){
-        this.id = id
+        this.uid = uid
         this.firstName = firstName
         this.lastName = lastName
         this.gender = gender
