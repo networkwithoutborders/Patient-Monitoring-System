@@ -1,6 +1,6 @@
 import React from "react";
 import QRCode from "qrcode";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 // import SuccessAnimation from "actually-accessible-react-success-animation";
 
@@ -12,12 +12,13 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const PatientQrCode = () => {
 	const navigate = useNavigate();
+	const { id } = useParams();
 	const [qrCode, setQrCode] = React.useState("");
 
 	const generateQrCode = async () => {
-		// console.log(patient);
+		// console.log(id);
 		try {
-			const response = await QRCode.toDataURL("patient_id");
+			const response = await QRCode.toDataURL(id);
 			setQrCode(response);
 		} catch (err) {
 			console.log(err);
