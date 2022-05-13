@@ -3,7 +3,7 @@ const db = require('../database/postgres');
 const PatientRepo = {};
 
 /*
-    Different types if id supported =>
+    Different types of id supported =>
     1) phone_number
     2) adhar_number
     3) drving_license
