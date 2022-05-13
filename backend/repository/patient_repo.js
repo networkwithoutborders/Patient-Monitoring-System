@@ -6,7 +6,7 @@ const PatientRepo = {};
     Different types of id supported =>
     1) phone_number
     2) adhar_number
-    3) drving_license
+    3) driving_license
     4) pan
 */
 
@@ -28,6 +28,8 @@ PatientRepo.registerPatient = async function(patient, patientInfo, patientVitals
         ($1, $2, $3, $4, $5, $6, $7, $8);`, 
         [patientUid, patientVitals.bp, patientVitals.temperature, patientVitals.pulse,
         patientVitals.pain, patientVitals.respiratoryRate, patientVitals.cbg, patientVitals.spo2]);
+
+    return patientUid;
 }
 
 module.exports = PatientRepo;

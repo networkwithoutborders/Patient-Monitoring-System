@@ -86,7 +86,8 @@ async function tables(){
         respiratory_rate float4, 
         cbg float4, 
         spo2 float4, 
-        constraint fk_patient_uid foreign key (patient_uid) references patient(uid));`)
+        constraint fk_patient_uid foreign key (patient_uid) references patient(uid));`);
+
 
 }
 

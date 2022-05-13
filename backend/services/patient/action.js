@@ -33,9 +33,10 @@ const registerPatient = asyncHandler(async (req, res) => {
         vitals.spo2,
     );
 
-    await PatientRepo.registerPatient(patient, patientId, patientVitals);
+    const patientUid = await PatientRepo.registerPatient(patient, patientId, patientVitals);
 
-    res.send({msg: 'Successfuly Registered'});
+    res.send({msg: 'Successfuly Registered', 
+        patient_uid: 'PID' + patientUid});
 
 });
 
