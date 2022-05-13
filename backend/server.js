@@ -33,7 +33,7 @@ app.use((err, req, res, next) => {
 			res.status(400).send({ msg: 'Invalid Authentication' });
 			break;
 		case '401':
-			res.status(401).send({msg: 'Tokens Expired'})
+			res.status(401).send({msg: 'Token Expired'})
 			break;
 		default:
 			res.status(500).send({ msg: 'Internal Server Error' });

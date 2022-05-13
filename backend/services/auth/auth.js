@@ -11,7 +11,7 @@ const tokenGen = require('./tokens')
 
 const registerEmployee = asyncHandler(async (req, res) =>{
     const employee = new Employee(
-        req.body.id,
+        req.body.uid,
         req.body.firstName,
         req.body.lastName, 
         req.body.gender,
@@ -48,9 +48,9 @@ const registerEmployee = asyncHandler(async (req, res) =>{
 
 const loginEmployee = asyncHandler(async (req, res) =>{
 
-    const {id, password, user_type} = req.body;
+    const { uid, password, user_type} = req.body;
     
-    const employee = await EmployeeRepo.findEmployee(id);
+    const employee = await EmployeeRepo.findEmployee(uid);
 
     if(!employee || user_type != employee.userType){
         throw new Error(400);
