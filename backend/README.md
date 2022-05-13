@@ -35,4 +35,4 @@ https://pacific-garden-92293.herokuapp.com/
     }
 }
 ```
-(Note => Make sure to add access token you have received while logging to the 'authorization' section of the request header while using the endpoint.)
+(Note => Make sure to add "Bearer" + access token you have received while logging to the 'authorization' section of the request header while using the endpoint.)
