@@ -58,8 +58,12 @@ async function tables(){
         ('pan')`)
     };
 
+    try{
+        await pool.query(`create sequence patient_seq start with 1000;`);
+    }catch(e){}
+
     await pool.query(`create table if not exists patient(
-        uid serial primary key, 
+        uid text primary key default 'PID'||nextval('patient_seq'::regclass), 
         employee_uid int, 
         name varchar(50), 
         age int, 
@@ -71,13 +75,8 @@ async function tables(){
         constraint fk_employee_uid foreign key(employee_uid) 
         references employee(uid));`);
 
-    res = await pool.query(`select count(*) from patient`)
-    if(res.rows[0].count == 0){
-        pool.query(`select setval('patient_uid_seq', 100000);`)
-    };
-
     await pool.query(`create table if not exists patient_id(
-        patient_uid int, 
+        patient_uid text, 
         id_value varchar(50), 
         id_type int, 
         constraint fk_patient_uid 
@@ -85,7 +84,7 @@ async function tables(){
         constraint fk_id_type foreign key (id_type) references id_types(id));`);
   
     await pool.query(`create table if not exists patient_vitals(
-        patient_uid int, 
+        patient_uid text, 
         bp float4, 
         temperature float4, 
         pulse float4, 
