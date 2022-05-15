@@ -1,4 +1,9 @@
 import React from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { getUserProfile } from "../redux/user/user.action";
+
 import {
 	Grid,
 	IconButton,
@@ -14,14 +19,31 @@ import { ReactComponent as Logo } from "../assets/doctor-svgrepo-com.svg";
 const ParamedicProfile = () => {
 	let isImage = false;
 	let imageLink = "";
+	const user = useSelector((state) => state.userReducer);
 	const [isPrimPhoneEdit, setIsPrimPhoneEdit] = React.useState(false);
 	const [isSecPhoneEdit, setIsSecPhoneEdit] = React.useState(false);
 	const [isDescEdit, setIsDescEdit] = React.useState(false);
 	const [editProfileDetails, setEditProfileDetails] = React.useState({
-		primaryContact: "9201841211",
-		secondaryContact: "6310982181",
+		primaryContact: `${user.contacts?.primary_contact || ""}`,
+		secondaryContact: `${user.contacts?.secondary_contact || ""}`,
 		description: "",
 	});
+	const { id } = useParams();
+	const access_token = useSelector((state) => state.userReducer.access_token);
+	const dispatch = useDispatch();
+
+	React.useEffect(() => {
+		dispatch(getUserProfile(id, access_token)).then((response) => {
+			const { primary_contact, secondary_contact } =
+				response.payload.contacts;
+
+			setEditProfileDetails({
+				primaryContact: `${primary_contact}`,
+				secondaryContact: `${secondary_contact}`,
+				description: "",
+			});
+		});
+	}, []);
 
 	const handleProfileDetChange = (prop) => (event) => {
 		setEditProfileDetails({
@@ -95,7 +117,7 @@ const ParamedicProfile = () => {
 							sx={{ fontWeight: "bold" }}
 							gutterBottom
 						>
-							Dr. James Martin
+							{`Dr. ${user.first_name} ${user.last_name}`}
 						</Typography>
 						<Typography
 							variant="body1"
@@ -103,7 +125,7 @@ const ParamedicProfile = () => {
 							sx={{ opacity: "100" }}
 							gutterBottom
 						>
-							Paramedic
+							{`${user.userType}`}
 						</Typography>
 					</Grid>
 				</Grid>
@@ -121,7 +143,7 @@ const ParamedicProfile = () => {
 							fullWidth
 							sx={{ mb: 4, opacity: "80" }}
 							label="Email"
-							value="abc@gmail.com"
+							value={`${user.email}`}
 							disabled
 							variant="standard"
 						/>

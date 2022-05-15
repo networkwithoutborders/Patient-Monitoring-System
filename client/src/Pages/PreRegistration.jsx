@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route, NavLink, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -27,6 +28,8 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import PreRegistrationForm from "../components/PreRegistrationForm/PreRegistrationForm";
 import ParamedicHistory from "./ParamedicHistory";
 import ParamedicProfile from "./ParamedicProfile";
+
+import { userLogout } from "../redux/user/user.action";
 
 const drawerWidth = 240;
 
@@ -59,6 +62,9 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 const PreRegistration = () => {
 	const theme = useTheme();
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const userId = useSelector((state) => state.userReducer.uid);
+	const userName = useSelector((state) => state.userReducer.name);
 	const [title, setTitle] = React.useState("Pre Registration");
 	const [open, setOpen] = React.useState(false);
 	const [isLoggedIn] = React.useState(true);
@@ -105,9 +111,7 @@ const PreRegistration = () => {
 								<AccountCircleIcon />
 							</ListItemIcon>
 							<ListItemText
-								primary={`${
-									isLoggedIn.displayName || "username"
-								}`}
+								primary={`Dr. ${userName || "username"}`}
 								primaryTypographyProps={{
 									fontWeight: "bold",
 								}}
@@ -160,7 +164,7 @@ const PreRegistration = () => {
 							textDecoration: "none",
 						};
 					}}
-					to={`/paramedic/profile/:id`}
+					to={`/paramedic/profile/${userId}`}
 				>
 					<ListItem button>
 						<ListItemIcon>
@@ -212,8 +216,8 @@ const PreRegistration = () => {
 						width: "inherit",
 					}}
 					onClick={() => {
+						dispatch(userLogout());
 						navigate("/");
-						console.log("sign out");
 					}}
 				>
 					<ListItemIcon sx={{ pl: 1 }}>
