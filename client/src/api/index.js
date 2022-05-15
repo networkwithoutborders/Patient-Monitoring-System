@@ -18,3 +18,20 @@ export const preRegisterPatient = (form, access_token) => {
 		},
 	});
 };
+
+export const getEmployeeProfile = (uid, access_token) => {
+	// console.log(uid, access_token);
+	return API.get(`/employee/profile/${uid}`, {
+		headers: {
+			Authorization: "Bearer " + access_token,
+		},
+	});
+};
+
+export const getPatientHistory = (access_token) => {
+	return API.get("/employee/patients", {
+		headers: {
+			Authorization: "Bearer " + access_token,
+		},
+	});
+};

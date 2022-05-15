@@ -15,6 +15,23 @@ const userReducer = (state = INITIAL_STATE, action) => {
 				...action.payload,
 			};
 
+		case types.GET_USER_PROFILE:
+			return {
+				...state,
+				...action.payload,
+			};
+
+		case types.GET_PATIENT_HISTORY:
+			return {
+				...state,
+				patientHistory: action.payload,
+			};
+
+		case types.USER_LOGOUT:
+			return {
+				...action.payload,
+			};
+
 		default:
 			return state;
 	}

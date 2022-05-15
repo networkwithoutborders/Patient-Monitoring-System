@@ -5,7 +5,6 @@ export const setUserType = (type) => {
 };
 
 export const loginUser = async (username, password, userType) => {
-	// console.log(username, password);
 	const credentials = {
 		uid: username,
 		password: password,
@@ -18,4 +17,28 @@ export const loginUser = async (username, password, userType) => {
 		.catch((error) => console.log("error"));
 
 	return data;
+};
+
+export const getUserProfile = async (uid, access_token) => {
+	let data = null;
+	await API.getEmployeeProfile(uid, access_token)
+		.then((response) => (data = response.data))
+		.catch((error) => console.log("error"));
+
+	return data;
+};
+
+export const getPatientHistory = async (access_token) => {
+	let data = null;
+	await API.getPatientHistory(access_token)
+		.then((response) => (data = response.data))
+		.catch((error) => console.log("error"));
+
+	return data;
+};
+
+export const userLogout = () => {
+	return {
+		userType: "",
+	};
 };
