@@ -7,7 +7,7 @@ const tokens = require('../services/auth/tokens');
 router.post('/register', employee.registerEmployee);
 router.post('/login', employee.loginEmployee);
 
-router.get('/gentoken', tokens.generateNewTokens)
+router.get('/gentoken', tokens.generateNewTokens);
 
 
 module.exports = router;

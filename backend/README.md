@@ -2,7 +2,7 @@
 https://pacific-garden-92293.herokuapp.com/
 
 ### API Endpoints
-/ -  shows a text to show the server is running <br />
+/ -  displays a text showing the server is running<br />
 
 #### For authentication
 /auth/login (POST) - Send uid and password as json body to login <br />
@@ -53,7 +53,7 @@ https://pacific-garden-92293.herokuapp.com/
 ```
 (Note => Make sure to add "Bearer " + access token you have received while logging to the 'authorization' section of the request header while using the endpoint.)
 
-### For employee
+#### For employee
 
 /employee/profile/{uid} (GET) - To find the profile of the employee replace uid with the employee's uid who'se profile you want to search.
 

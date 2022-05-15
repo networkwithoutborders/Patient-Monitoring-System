@@ -72,7 +72,7 @@ EmployeeRepo.findProfile = async function(uid){
 
 EmployeeRepo.listPatients = async function(uid){
     const res = await db.query(`select visit_time, uid, severity from patient
-    where employee_uid = $1`, [uid]);
+    where employee_uid = $1 order by visit_time desc`, [uid]);
     
     return res.rows;
 }
