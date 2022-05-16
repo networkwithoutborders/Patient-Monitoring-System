@@ -55,7 +55,9 @@ EmployeeRepo.findEmployee = async function(uid){
 }
 
 EmployeeRepo.findProfile = async function(uid){
-    const res = await db.query(`select * from employee where uid = $1`, [uid]);
+    const res = await db.query(`select * from employee 
+    join user_types on user_type = type_id    
+    where uid = $1`, [uid]);
     const row = res.rows[0];
     return new Employee(
         row.uid,
@@ -64,7 +66,7 @@ EmployeeRepo.findProfile = async function(uid){
         row.gender,
         row.email,
         undefined,
-        row.user_type,
+        row.type,
         row.primary_contact,
         row.secondary_contact,
         row.description,
