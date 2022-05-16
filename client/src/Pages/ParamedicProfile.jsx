@@ -38,9 +38,9 @@ const ParamedicProfile = () => {
 				response.payload.contacts;
 
 			setEditProfileDetails({
-				primaryContact: `${primary_contact}`,
-				secondaryContact: `${secondary_contact}`,
-				description: "",
+				primaryContact: primary_contact,
+				secondaryContact: secondary_contact,
+				description: response.payload.description,
 			});
 		});
 	}, []);
