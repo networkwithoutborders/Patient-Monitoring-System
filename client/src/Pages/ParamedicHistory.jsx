@@ -28,6 +28,28 @@ const ParamedicHistory = () => {
 				<CircularProgress sx={{ mt: 5 }} />
 			) : (
 				ParamedicHistDet.map((detail, i) => {
+					const date = new Date(detail.visit_time);
+					const monthNames = [
+						"January",
+						"February",
+						"March",
+						"April",
+						"May",
+						"June",
+						"July",
+						"August",
+						"September",
+						"October",
+						"November",
+						"December",
+					];
+					const time = `${date.getHours()}:${String(
+						date.getMinutes()
+					).padStart(2, "0")} ${
+						monthNames[date.getMonth()]
+					} ${date.getDate()}`;
+					// console.log(time);
+
 					return (
 						<Grid
 							key={i}
@@ -41,7 +63,7 @@ const ParamedicHistory = () => {
 							}}
 						>
 							<ParamedicHistoryCard
-								visitTime={detail.visit_time}
+								visitTime={time}
 								uhid={detail.uid}
 								codeColor={detail.severity}
 							/>
