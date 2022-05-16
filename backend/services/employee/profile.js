@@ -16,7 +16,8 @@ const findProfile = asyncHandler(async (req, res) => {
         contacts: {
             primary_contact: employee.primaryContact,
             secondary_contact: employee.secondaryContact
-        }
+        },
+        description: employee.description,
     });
 });
 

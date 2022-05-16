@@ -15,7 +15,7 @@ const registerPatient = asyncHandler(async (req, res) => {
     const patient = new Patient(
         details.name,
         details.age,
-        details.gender[0].toUpperCase(),
+        details.gender && details.gender[0].toUpperCase(),
         uid,
         body.avpu,
         body.severity

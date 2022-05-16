@@ -15,11 +15,11 @@ const EmployeeRepo = {}
 
 EmployeeRepo.registerEmployee = async function(employee){
     const res = await db.query(`insert into employee(uid, first_name, last_name, 
-        gender, email, password, user_type, primary_contact, secondary_contact)
-    select $1, $2, $3, $4, $5, $6, type_id, $8, $9 from user_types where type = $7 ;`, 
+        gender, email, password, user_type, primary_contact, secondary_contact, description)
+    select $1, $2, $3, $4, $5, $6, type_id, $8, $9, $10 from user_types where type = $7 ;`, 
     [employee.uid, employee.firstName, employee.lastName, employee.gender,
     employee.email, employee.password, employee.userType, employee.primaryContact,
-        employee.secondaryContact]);
+        employee.secondaryContact, employee.description]);
     if(!res.rowCount) throw new Error('Invalid user_type')
         
 }
@@ -67,6 +67,7 @@ EmployeeRepo.findProfile = async function(uid){
         row.user_type,
         row.primary_contact,
         row.secondary_contact,
+        row.description,
     );
 }
 

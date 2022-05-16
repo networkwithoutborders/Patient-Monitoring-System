@@ -22,6 +22,7 @@ const registerEmployee = asyncHandler(async (req, res) =>{
         req.body.user_type,
         contacts.primary_contact,
         contacts.secondary_contact,
+        req.body.description,
     );
     
     if(!employee.isValid()){

@@ -14,6 +14,7 @@ class Employee {
         userType,
         primaryContact,
         secondaryContact,
+        description,
     ){
         this.uid = uid
         this.firstName = firstName;
@@ -24,7 +25,8 @@ class Employee {
         this.userType = userType;
         this.primaryContact = primaryContact;
         this.secondaryContact = secondaryContact;
-        
+        this.description = description;
+
     }
 
     // Check Employee fields are valid or not

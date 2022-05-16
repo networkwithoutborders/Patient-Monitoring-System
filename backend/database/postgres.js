@@ -41,10 +41,11 @@ async function tables(){
         gender varchar(1),
         primary_contact int,
         secondary_contact int,
+        description varchar(20),
         constraint fk_user_type foreign key(user_type) references
         user_types(type_id));`);
-       
-        
+     
+    await pool.query(`update employee set description = 'SRM doctor';`)
     await pool.query(`create table if not exists id_types(
         id serial primary key, 
         type varchar(20));`);
