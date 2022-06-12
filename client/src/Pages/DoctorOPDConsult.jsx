@@ -14,6 +14,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 import { Autocomplete, Button, Grid, Stack, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { useNavigate } from "react-router-dom";
 
 const DeptOptions = ["A", "B", "C", "D"];
 const DrOptions = ["A", "B", "C", "D"];
@@ -21,6 +22,7 @@ const DrOptions = ["A", "B", "C", "D"];
 const DoctorOPDConsult = () => {
   const [fromDate, setFromDate] = React.useState(Date);
   const [toDate, setToDate] = React.useState(Date);
+  const navigate = useNavigate();
 
   const handleFromDateChange = (newValue) => {
     setFromDate(newValue);
@@ -30,12 +32,16 @@ const DoctorOPDConsult = () => {
     setToDate(newValue);
   };
 
+  const handleHomeClick = () => {
+    navigate(`/`);
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <MuiAppBar position="fixed" sx={{ backgroundColor: "#3f51b5" }}>
         <Toolbar>
-          <IconButton>
+          <IconButton color="inherit" onClick={handleHomeClick}>
             <HomeIcon sx={{ color: "#fff" }} />
           </IconButton>
           <Typography variant="h6" noWrap component="div" sx={{ ml: 3 }}>
