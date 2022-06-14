@@ -1,27 +1,50 @@
 import React from "react";
 
-import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 import { Autocomplete, Button, Grid, Stack, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useNavigate } from "react-router-dom";
+import PatientDetailCard from "../components/PatientDetailCard/PatientDetailCard";
+import { getAge } from "../components/HelperFunction/calculateAge";
 
 const DeptOptions = ["A", "B", "C", "D"];
 const DrOptions = ["A", "B", "C", "D"];
 
+const patientDetails = [
+  {
+    name: "ABC",
+    uhid: "2231233",
+    birthDate: new Date("2001-10-09"),
+    sex: "Male",
+    status: "Yet to Consult",
+    doctor: "Dr. James Martin",
+  },
+  {
+    name: "ABC",
+    uhid: "2231233",
+    birthDate: new Date("2000-12-30"),
+    sex: "Male",
+    status: "Yet to Consult",
+    doctor: "Dr. James Martin",
+  },
+];
+
 const DoctorOPDConsult = () => {
-  const [fromDate, setFromDate] = React.useState(Date);
-  const [toDate, setToDate] = React.useState(Date);
+  const [fromDate, setFromDate] = React.useState(new Date());
+  const [toDate, setToDate] = React.useState(new Date());
+  const [uhid, setUhid] = React.useState("");
+  const [ipNo, setIpNo] = React.useState("");
+  const [dept, setDept] = React.useState(null);
+  const [doctor, setDoctor] = React.useState(null);
+  const [isDetailClicked, setIsDetailClicked] = React.useState(false);
+  const [isDetailFound, setIsDetailFound] = React.useState(false);
   const navigate = useNavigate();
 
   const handleFromDateChange = (newValue) => {
@@ -32,8 +55,37 @@ const DoctorOPDConsult = () => {
     setToDate(newValue);
   };
 
+  const handleUhidChange = (e) => {
+    setUhid(e.target.value);
+  };
+
+  const handleIpChange = (e) => {
+    setIpNo(e.target.value);
+  };
+
+  //const handleDeptChange = (newValue) => {
+  //  setDept(newValue);
+  // };
+
+  //   const handleDrChange = (newValue) => {
+  //  setDoctor(newValue);
+  //};
+
   const handleHomeClick = () => {
     navigate(`/`);
+  };
+
+  const handleDetailsClick = () => {
+    setIsDetailClicked(!isDetailClicked);
+  };
+
+  const handleClearClick = () => {
+    setFromDate(null);
+    setToDate(null);
+    setUhid("");
+    setIpNo("");
+    // setDept(null);
+    //setDoctor(null);
   };
 
   return (
@@ -113,17 +165,28 @@ const DoctorOPDConsult = () => {
               </Grid>
 
               <Grid item xs={6} md={6}>
-                <TextField variant="outlined" label="UHID" />
+                <TextField
+                  variant="outlined"
+                  label="UHID"
+                  value={uhid}
+                  onChange={handleUhidChange}
+                />
               </Grid>
               <Grid item xs={6} md={6}>
-                <TextField variant="outlined" label="IP No." />
+                <TextField
+                  variant="outlined"
+                  label="IP No."
+                  value={ipNo}
+                  onChange={handleIpChange}
+                />
               </Grid>
               <Grid item xs={12} md={12}>
                 <Autocomplete
-                  multiple
                   options={DeptOptions}
                   getOptionLabel={(option) => option}
                   filterSelectedOptions
+                  // onChange={handleDeptChange}
+                  //value={dept}
                   renderInput={(params) => (
                     <TextField {...params} label="Department" />
                   )}
@@ -131,10 +194,11 @@ const DoctorOPDConsult = () => {
               </Grid>
               <Grid item xs={12} md={12}>
                 <Autocomplete
-                  multiple
                   options={DrOptions}
                   getOptionLabel={(option) => option}
                   filterSelectedOptions
+                  // value={doctor}
+                  // onChange={handleDrChange}
                   renderInput={(params) => (
                     <TextField {...params} label="Doctor" />
                   )}
@@ -152,6 +216,7 @@ const DoctorOPDConsult = () => {
               <Grid item xs={5} md={6}>
                 <Button
                   variant="contained"
+                  onClick={handleDetailsClick}
                   sx={{
                     width: "100%",
                     backgroundColor: "#3F51B5",
@@ -164,6 +229,7 @@ const DoctorOPDConsult = () => {
               <Grid item xs={5} md={6}>
                 <Button
                   variant="contained"
+                  onClick={handleClearClick}
                   sx={{
                     width: "100%",
                     backgroundColor: "#3F51B5",
@@ -174,6 +240,72 @@ const DoctorOPDConsult = () => {
                 </Button>
               </Grid>
             </Grid>
+            {isDetailClicked && (
+              <>
+                <Divider sx={{ pt: 2, borderColor: "black", opacity: "50%" }} />
+                <Typography variant="body1" sx={{ pt: 1 }}>
+                  Patient Details
+                </Typography>
+
+                {isDetailFound ? (
+                  <Grid
+                    container
+                    direction="column"
+                    justifyContent="center"
+                    alignItems="center"
+                    spacing={2}
+                    sx={{ pt: 2 }}
+                  >
+                    <Grid item xs={12} md={6}>
+                      <Typography variant="h5" sx={{ pt: 4 }}>
+                        No Patient Records found.
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                ) : (
+                  <Grid
+                    container
+                    direction="column"
+                    justifyContent="center"
+                    alignItems="center"
+                    spacing={2}
+                    sx={{ pt: 2 }}
+                  >
+                    {patientDetails.map((details, i) => {
+                      let dobYear = details.birthDate.getYear();
+                      let dobMonth = details.birthDate.getMonth();
+                      let dobDate = details.birthDate.getDate();
+                      let ageString = getAge(dobYear, dobMonth, dobDate);
+
+                      return (
+                        <Grid
+                          item
+                          key={i}
+                          xs={12}
+                          md={6}
+                          sx={{
+                            display: "flex",
+                            justifyContent: "center",
+
+                            width: "100%",
+                          }}
+                        >
+                          <PatientDetailCard
+                            orderNo={i + 1}
+                            name={details.name}
+                            age={ageString}
+                            uhid={details.uhid}
+                            sex={details.sex}
+                            status={details.status}
+                            doctor={details.doctor}
+                          />
+                        </Grid>
+                      );
+                    })}
+                  </Grid>
+                )}
+              </>
+            )}
           </Grid>
         </Stack>
       </Box>
