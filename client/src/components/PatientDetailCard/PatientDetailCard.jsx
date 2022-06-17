@@ -6,6 +6,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const PatientDetailCard = ({
   orderNo,
@@ -16,9 +17,14 @@ const PatientDetailCard = ({
   status,
   doctor,
 }) => {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/doctor/opd/${uhid}`);
+  };
   return (
     <Card elevation={4} sx={{ width: "100%", borderRadius: "20px" }}>
-      <CardActionArea>
+      <CardActionArea onClick={handleCardClick}>
         <CardContent>
           <Grid
             container
@@ -36,25 +42,25 @@ const PatientDetailCard = ({
                 flexDirection: "column",
               }}
             >
-              <Typography variant="body1" gutterBottom>
+              <Typography variant="body1" gutterBottom sx={{ opacity: "60%" }}>
                 Order No
               </Typography>
-              <Typography variant="body1" gutterBottom>
+              <Typography variant="body1" gutterBottom sx={{ opacity: "60%" }}>
                 Patient Name
               </Typography>
-              <Typography variant="body1" gutterBottom>
+              <Typography variant="body1" gutterBottom sx={{ opacity: "60%" }}>
                 UHID No
               </Typography>
-              <Typography variant="body1" gutterBottom>
+              <Typography variant="body1" gutterBottom sx={{ opacity: "60%" }}>
                 Age (Y/M/D)
               </Typography>
-              <Typography variant="body1" gutterBottom>
+              <Typography variant="body1" gutterBottom sx={{ opacity: "60%" }}>
                 Sex
               </Typography>
-              <Typography variant="body1" gutterBottom>
+              <Typography variant="body1" gutterBottom sx={{ opacity: "60%" }}>
                 Status
               </Typography>
-              <Typography variant="body1" gutterBottom>
+              <Typography variant="body1" gutterBotto sx={{ opacity: "60%" }}>
                 Doctor
               </Typography>
             </Grid>

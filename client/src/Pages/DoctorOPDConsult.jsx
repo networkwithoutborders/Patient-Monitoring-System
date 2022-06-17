@@ -1,18 +1,19 @@
 import React from "react";
 
 import Box from "@mui/material/Box";
-import MuiAppBar from "@mui/material/AppBar";
+
 import Toolbar from "@mui/material/Toolbar";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import HomeIcon from "@mui/icons-material/Home";
+
 import { Autocomplete, Button, Grid, Stack, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useNavigate } from "react-router-dom";
 import PatientDetailCard from "../components/PatientDetailCard/PatientDetailCard";
 import { getAge } from "../components/HelperFunction/calculateAge";
+import DoctorNavbar from "../components/DoctorNavbar/DoctorNavbar";
 
 const DeptOptions = ["A", "B", "C", "D"];
 const DrOptions = ["A", "B", "C", "D"];
@@ -27,8 +28,8 @@ const patientDetails = [
     doctor: "Dr. James Martin",
   },
   {
-    name: "ABC",
-    uhid: "2231233",
+    name: "ABD",
+    uhid: "2231234",
     birthDate: new Date("2000-12-30"),
     sex: "Male",
     status: "Yet to Consult",
@@ -45,7 +46,6 @@ const DoctorOPDConsult = () => {
   const [doctor, setDoctor] = React.useState(null);
   const [isDetailClicked, setIsDetailClicked] = React.useState(false);
   const [isDetailFound, setIsDetailFound] = React.useState(false);
-  const navigate = useNavigate();
 
   const handleFromDateChange = (newValue) => {
     setFromDate(newValue);
@@ -71,10 +71,6 @@ const DoctorOPDConsult = () => {
   //  setDoctor(newValue);
   //};
 
-  const handleHomeClick = () => {
-    navigate(`/`);
-  };
-
   const handleDetailsClick = () => {
     setIsDetailClicked(!isDetailClicked);
   };
@@ -90,17 +86,7 @@ const DoctorOPDConsult = () => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <MuiAppBar position="fixed" sx={{ backgroundColor: "#3f51b5" }}>
-        <Toolbar>
-          <IconButton color="inherit" onClick={handleHomeClick}>
-            <HomeIcon sx={{ color: "#fff" }} />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div" sx={{ ml: 3 }}>
-            Dr. James Martin
-          </Typography>
-        </Toolbar>
-      </MuiAppBar>
+      <DoctorNavbar />
       <Box
         sx={{
           flexGrow: 1,
