@@ -2,9 +2,9 @@ const {Pool} = require('pg');
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false
-    }
+    // ssl: {
+    //     rejectUnauthorized: false
+    // }
 });
 
 pool.query('select now()', (err, res) => {
@@ -70,6 +70,7 @@ async function tables(){
         gender varchar(1), 
         avpu varchar(30),
         severity varchar(10),
+        status varchar(30),
         visit_time timestamp without time zone 
         default (now() at time zone 'utc'), 
         constraint fk_employee_uid foreign key(employee_uid) 
