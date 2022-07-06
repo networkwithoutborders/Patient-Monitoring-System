@@ -60,7 +60,7 @@ const PatientDetailCard = ({
               <Typography variant="body1" gutterBottom sx={{ opacity: "60%" }}>
                 Status
               </Typography>
-              <Typography variant="body1" gutterBotto sx={{ opacity: "60%" }}>
+              <Typography variant="body1" gutterBottom sx={{ opacity: "60%" }}>
                 Doctor
               </Typography>
             </Grid>
