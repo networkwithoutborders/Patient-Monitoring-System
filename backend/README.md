@@ -4,7 +4,7 @@ https://pacific-garden-92293.herokuapp.com/
 ### API Endpoints
 / -  displays a text showing the server is running<br />
 
-#### For authentication
+### For authentication
 /auth/login (POST) - Send uid and password as json body to login <br />
 
 /auth/register (POST) - To register a new employee. A request of the following form must be sent to the end-point:
@@ -28,7 +28,7 @@ uer_type can contain on of the 4 strings (doctor, paramedic, nurse, emt, mod)
 
 /auth/gentoken (GET) -  Send "Bearer" keyword along with refresh token with a space in Authorization part of the request header, to generate a new pair of access token and refresh token when token expiration error occurs (HTTP CODE := 401)
 
-#### For patient registration
+### For patient registration
 /patient/register (POST) - To register a new patient. A request of the following form must be sent to the end-point:
 ```
 {
@@ -54,7 +54,7 @@ uer_type can contain on of the 4 strings (doctor, paramedic, nurse, emt, mod)
 ```
 (Note => Make sure to add "Bearer " + access token you have received while logging to the 'authorization' section of the request header while using the endpoint.)
 
-#### For employee
+### For employee
 
 /employee/profile/{uid} (GET) - To find the profile of the employee replace uid with the employee's uid who'se profile you want to search.
 
