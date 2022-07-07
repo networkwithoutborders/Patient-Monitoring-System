@@ -68,7 +68,7 @@ uer_type can contain on of the 4 strings (doctor, paramedic, nurse, emt, mod)
 
 doctor/opd/search (GET) - To find search for patients that are registered under a particular doctor.
 
-This url send list as paged data (for performance efficiency) along with the url send page number (page) and page size (pageSize) as get url parameters.
+This url sends list as paged data (for performance efficiency) along with the url send page number (page) and page size (pageSize) as get url parameters.
 Sample => http://localhost:3000/doctor/opd/search?page=1&&pageSize=30
 * Value of page starts from 1
 * If both the values are not provided the defualt value of page will be 1 and   page_size will be 30.
@@ -83,10 +83,13 @@ Sample json format to search =>
 Property Defination => 
 
 from -> to search patients that are registered after a particular date.
+
 to -> to search patients that are registered before a particular date.
+
 patient_uid -> to search for a particular patient using patient's uid.
 
 For javascript frontend => Send the json format of date and time using the Date() objects toJson() method. 
+
 Example => new Date.toJson()
 
 If none of the values are provided it will show all the patients as defualt.
