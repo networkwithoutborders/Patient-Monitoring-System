@@ -23,6 +23,7 @@ https://pacific-garden-92293.herokuapp.com/
     }
 }
 ```
+uer_type can contain on of the 4 strings (doctor, paramedic, nurse, emt, mod)
 <br />
 
 /auth/gentoken (GET) -  Send "Bearer" keyword along with refresh token with a space in Authorization part of the request header, to generate a new pair of access token and refresh token when token expiration error occurs (HTTP CODE := 401)

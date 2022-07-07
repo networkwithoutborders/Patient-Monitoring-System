@@ -7,17 +7,17 @@ class OpdSearch {
     constructor (
         from,
         to,
-        uhid,
+        patientUid,
         ipNo,
         department,
-        doctor
+        doctorUid
     ){
         this.from = from;
         this.to = to;
-        this.uhid = uhid;
+        this.patientUid = patientUid;
         this.ipNo = ipNo;
         this.department = department;
-        this.doctor = doctor;
+        this.doctorUid = doctorUid;
     }
 }
 
