@@ -66,11 +66,11 @@ uer_type can contain on of the 4 strings (doctor, paramedic, nurse, emt, mod)
 
 #### Opd Consultation
 
-doctor/opd/search (GET) - To find search for patients that are registered under a particular doctor.
+doctor/opd/search (GET) - To search for patients that are registered under a particular doctor.
 
 This url sends list as paged data (for performance efficiency) along with the url send page number (page) and page size (pageSize) as get url parameters.
 Sample => http://localhost:3000/doctor/opd/search?page=1&&pageSize=30
-* Value of page starts from 1
+* Value of page starts from 1.
 * If both the values are not provided the defualt value of page will be 1 and   page_size will be 30.
 
 Sample json format to search =>
