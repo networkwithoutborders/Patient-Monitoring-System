@@ -23,7 +23,6 @@ DoctorRepo.opdSearch = async function(opdSearch, page, pageSize){
         query += ` and visit_time < $` + queryParams.length;
     }
 
-    console.log(opdSearch.patientUid)
     if(opdSearch.patientUid){
         queryParams.push(opdSearch.patientUid);
         query += ` and patient.uid = $` + queryParams.length;
