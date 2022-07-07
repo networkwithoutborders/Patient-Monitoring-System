@@ -80,7 +80,8 @@ Sample json format to search =>
     "to": "2022-07-07T07:07:33.184Z",
     "patient_uid": "PID1014"
 ```
-Property Defination =>
+Property Defination => 
+
 from -> to search patients that are registered after a particular date.
 to -> to search patients that are registered before a particular date.
 patient_uid -> to search for a particular patient using patient's uid.
