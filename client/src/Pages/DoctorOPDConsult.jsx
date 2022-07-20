@@ -11,7 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import { Autocomplete, Button, Grid, Stack, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useNavigate } from "react-router-dom";
-import PatientDetailCard from "../components/PatientDetailCard/PatientDetailCard";
+import PatientDetailCard from "../components/PatientDetailCard/PatientDetailCardOpd";
 import { getAge } from "../components/HelperFunction/calculateAge";
 import DoctorNavbar from "../components/DoctorNavbar/DoctorNavbar";
 

@@ -10,7 +10,9 @@ import DoctorOPDConsult from "./Pages/DoctorOPDConsult";
 
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import PatientDetailsOpd from "./Pages/PatientDetailsOpd";
 import PatientDetails from "./Pages/PatientDetails";
+import PatientVitals from "./Pages/PatientVitals";
 
 function App() {
   return (
@@ -22,7 +24,12 @@ function App() {
         <Route path="/paramedic/*" element={<PreRegistration />} />
         <Route path="/patient/QR/:id" element={<PatientQrCode />} />
         <Route path="/doctor/opd" element={<DoctorOPDConsult />} />
-        <Route path="/doctor/opd/:id" element={<PatientDetails />} />
+        <Route path="/doctor/opd/:id" element={<PatientDetailsOpd />} />
+        <Route path="/doctor/patient-details" element={<PatientDetails />} />
+        <Route
+          path="/doctor/patient-details/vitals"
+          element={<PatientVitals />}
+        />
       </Routes>
     </LocalizationProvider>
   );
