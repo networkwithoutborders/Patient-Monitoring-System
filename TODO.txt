@@ -1,0 +1,15 @@
+CLIENT-
+symptoms as present complaints
+references
+patient gallery as clinical img
+test reports as investigations as 2 subclasses ordered and ready
+common templates for common cold etc and add text area for new problem out of common ones
+onclick details expand
+designation, no need professional summary
+-------ORDERING---------
+vital records
+history
+presenting complaint
+blood reports
+todo as careplan 
+discharge note with warning sign-> review, followup
