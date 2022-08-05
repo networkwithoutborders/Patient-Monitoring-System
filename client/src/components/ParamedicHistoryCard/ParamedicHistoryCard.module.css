@@ -1,0 +1,17 @@
+.fcc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.bold {
+  font-weight: bold;
+}
+.fc {
+  display: flex;
+  justify-content: center;
+}
+.paper {
+  border-radius: 5px;
+  height: 40px;
+  width: 40px;
+}
