@@ -8,6 +8,7 @@ const refreshTokenKey = process.env.REFRESH_TOKEN_KEY;
     Access token refershes at an interval of 30 min
 */
 async function generateAcessToken(payload){
+    console.log(accessTokenKey)
     const token = await jwt.sign(payload, accessTokenKey, {
         algorithm: 'HS256',
         // @TODO - Add this in production stage for security

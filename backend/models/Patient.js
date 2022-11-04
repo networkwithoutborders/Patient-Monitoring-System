@@ -8,15 +8,13 @@ class Patient {
         name,
         age,
         gender,
-        employeeUid,
-        avpu,
+        employeeUid, 
         severity
     ){
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.employeeUid = employeeUid;
-        this.avpu = avpu;
         this.severity = severity;
     }
 }
@@ -41,6 +39,7 @@ class PatientVitals {
         respiratoryRate,
         cbg,
         spo2,
+        avpu
     ){
         this.bp = bp;
         this.temperature = temperature;
@@ -49,7 +48,7 @@ class PatientVitals {
         this.respiratoryRate = respiratoryRate;
         this.cbg = cbg;
         this.spo2 = spo2;
-
+        this.avpu = avpu;
     }
 }
 

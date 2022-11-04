@@ -39,7 +39,6 @@ uer_type can contain on of the 4 strings (doctor, paramedic, nurse, emt, mod)
         "age": 21,
         "gender": "M"
     },
-    "avpu": "Alert",
     "severity": "#ffffff",
     "vitals": {
         "bp": 12.3,
@@ -48,10 +47,15 @@ uer_type can contain on of the 4 strings (doctor, paramedic, nurse, emt, mod)
         "pain": 20,
         "respiratory_rate": 35.3,
         "cbg": 231,
-        "spo2": 19
+        "spo2": 19,
+        "avpu": "Alert",
     }
 }
 ```
+### For patient vitals
+/patient/vitals (GET) - To find the vitals of a particular patient. Set the query paramter "uid" to the patient uid whose vitals you want to search in the URL.
+For example => "http://localhost:5000/patient/vitals?uid=PID1018"
+
 (Note => Make sure to add "Bearer " + access token you have received while logging to the 'authorization' section of the request header while using the endpoint.)
 
 ### For employee

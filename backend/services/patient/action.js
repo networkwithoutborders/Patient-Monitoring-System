@@ -17,7 +17,6 @@ const registerPatient = asyncHandler(async (req, res) => {
         details.age,
         details.gender && details.gender[0].toUpperCase(),
         uid,
-        body.avpu,
         body.severity
     );
 
@@ -30,6 +29,7 @@ const registerPatient = asyncHandler(async (req, res) => {
         vitals.respiratory_rate,
         vitals.cbg,
         vitals.spo2,
+        vitals.avpu
     );
 
     const patientUid = await PatientRepo.registerPatient(patient, patientId, patientVitals);
@@ -39,6 +39,15 @@ const registerPatient = asyncHandler(async (req, res) => {
 
 });
 
+const findPatientVitals = asyncHandler(async (req, res) => {
+    const pUid  = req.query.uid;
+
+    const vitals = await PatientRepo.findPatientVitals(pUid);
+
+    res.send(vitals);
+});
+
 module.exports = {
     registerPatient,
+    findPatientVitals,
 };

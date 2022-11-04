@@ -60,7 +60,7 @@ const loginEmployee = asyncHandler(async (req, res) =>{
     if(!employee || user_type != employee.userType){
         throw new Error(400);
     }
-
+    
     const payload = {
         uid: employee.uid,
         user_type: employee.userType,

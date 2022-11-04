@@ -1,4 +1,5 @@
 const db = require('../database/postgres');
+const { Patient } = require('../models/Patient');
 
 const PatientRepo = {};
 
@@ -12,9 +13,9 @@ const PatientRepo = {};
 
 PatientRepo.registerPatient = async function(patient, patientInfo, patientVitals){
     const res = await db.query(`insert into patient(employee_uid, name, age, gender,
-         avpu, severity) values($1, $2, $3, $4, $5, $6) 
+        severity) values($1, $2, $3, $4, $5) 
          returning uid;`, [patient.employeeUid, patient.name, patient.age,
-        patient.gender, patient.avpu, patient.severity]);
+        patient.gender, patient.severity]);
 
     const patientUid = res.rows[0].uid;
 
@@ -24,12 +25,21 @@ PatientRepo.registerPatient = async function(patient, patientInfo, patientVitals
         [patientUid, patientInfo.id, patientInfo.idType]);
 
     await db.query(`insert into patient_vitals(patient_uid, bp, temperature, 
-        pulse, pain, respiratory_rate, cbg, spo2) values
-        ($1, $2, $3, $4, $5, $6, $7, $8);`, 
+        pulse, pain, respiratory_rate, cbg, spo2, avpu) values
+        ($1, $2, $3, $4, $5, $6, $7, $8, $9);`, 
         [patientUid, patientVitals.bp, patientVitals.temperature, patientVitals.pulse,
-        patientVitals.pain, patientVitals.respiratoryRate, patientVitals.cbg, patientVitals.spo2]);
+        patientVitals.pain, patientVitals.respiratoryRate, patientVitals.cbg, patientVitals.spo2,
+                patientVitals.avpu]);
 
     return patientUid;
+}
+
+
+PatientRepo.findPatientVitals = async function(uid) {
+    console.log(uid)
+    const res = await db.query(`select * from patient_vitals where patient_uid = $1`, [uid]);
+
+    return res.rows;
 }
 
 module.exports = PatientRepo;
