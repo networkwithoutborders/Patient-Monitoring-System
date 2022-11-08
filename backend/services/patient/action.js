@@ -64,7 +64,7 @@ const addPatientVitals = asyncHandler(async(req, res) => {
 
     await PatientRepo.addPatientVitals(uid, patientVitals);
 
-    res.send({msg: 'Successfuly Registered', 
+    res.send({msg: 'Successfuly Added', 
     patient_uid: uid});
 
 });
