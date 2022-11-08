@@ -36,10 +36,20 @@ PatientRepo.registerPatient = async function(patient, patientInfo, patientVitals
 
 
 PatientRepo.findPatientVitals = async function(uid) {
-    console.log(uid)
     const res = await db.query(`select * from patient_vitals where patient_uid = $1`, [uid]);
 
     return res.rows;
+}
+
+PatientRepo.addPatientVitals = async function(uid, patientVitals) {
+    console.log(uid);
+
+    await db.query(`insert into patient_vitals(patient_uid, bp, temperature, 
+        pulse, pain, respiratory_rate, cbg, spo2, avpu) values
+        ($1, $2, $3, $4, $5, $6, $7, $8, $9);`, 
+        [uid, patientVitals.bp, patientVitals.temperature, patientVitals.pulse,
+        patientVitals.pain, patientVitals.respiratoryRate, patientVitals.cbg, patientVitals.spo2,
+                patientVitals.avpu]);
 }
 
 module.exports = PatientRepo;

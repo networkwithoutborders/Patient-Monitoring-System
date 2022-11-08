@@ -47,7 +47,30 @@ const findPatientVitals = asyncHandler(async (req, res) => {
     res.send(vitals);
 });
 
+const addPatientVitals = asyncHandler(async(req, res) => {
+    const uid = req.body.uid;
+
+    const vitals = req.body.vitals;
+    const patientVitals = new PatientVitals(
+        vitals.bp,
+        vitals.temperature,
+        vitals.pulse,
+        vitals.pain,
+        vitals.respiratory_rate,
+        vitals.cbg,
+        vitals.spo2,
+        vitals.avpu
+    );
+
+    await PatientRepo.addPatientVitals(uid, patientVitals);
+
+    res.send({msg: 'Successfuly Registered', 
+    patient_uid: uid});
+
+});
+
 module.exports = {
     registerPatient,
     findPatientVitals,
+    addPatientVitals
 };
